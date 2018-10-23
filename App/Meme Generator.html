@@ -10,6 +10,10 @@
 </head>
 
 <body onload="init()">
+    <button class="show-list" onclick="onShowList()">Show pictures List</button>
+    <a href="#" class="download" onclick="downloadImg(this)" download="my-img.jpg" >
+            Download as jpeg
+          </a>
     <div id="btnsContainer">
         <button onclick="onSetFilter('all')"> Show All</button>
         <button onclick="onSetFilter('angry')"> Angry</button>
@@ -27,7 +31,7 @@
     </section>
 
     <section class="editor-container">
-        <input type="text" placeholder="Enter Text" oninput="creatLine(this.value)" />
+        <input type="text" placeholder="Enter Text" oninput="drawText(this.value)" />
         <div class=buttons-edit>
             <div class="delete" 🗑></div>
             <div class="text-style">
@@ -59,22 +63,7 @@
 
 
 
-    <section class="editor-container">
-        <input type="text" value="Enter text" placeholder="Enter text" />
-        <div class=buttons-edit>
-            <div class="delete" 🗑></div>
-            <div class="text-style">
-                <div class="color">✨</div>
-                <div class="shadow">-Å-</div>
-                <div class="font-size">Å</div>
-            </div>
-            <div class="text-size">
-                <div onclick="onBiggerText()" class="biggerText">➕</div>
-                <div onclick="onSmallerText()" class="smallerText">➖</div>
-            </div>
-            <div class="alignment">alignement</div>
-        </div>
-    </section>
+ 
     <!-- font family, font color, font size, L-R alignment, Up-Down alignment, delete line -->
     <script src="js/service.js"></script>
     <script src="js/main.js"></script>

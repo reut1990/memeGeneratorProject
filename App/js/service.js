@@ -54,6 +54,17 @@ function getImgs(filterTag) {
     })
 }
 
+function getSrc(id){
+     var findImgWithId=gImgs.find(function(img){
+        if(img.id===id)return img;
+    });
+    gMeme.id=findImgWithId.id;
+    return findImgWithId.url;
+}
+
+function returnGmeme(){
+    return gMeme;
+}
 
 // function getCanvasAndCtx() {
 //     var canvas = document.getElementById('canvas');
@@ -75,7 +86,7 @@ function enlargeText() {
     // console.log(textSize);
     gMeme.txts[0].size = textSize;
     console.log(gMeme);
-    creatLine(gMeme.txts[0].line);
+    drawText(gMeme.txts[0].line);
 }
 
 function decreaseText() {// unit with the enarge
@@ -87,14 +98,22 @@ function decreaseText() {// unit with the enarge
     // console.log(textSize);
     gMeme.txts[0].size = textSize;
     console.log(gMeme);
-    creatLine(gMeme.txts[0].line);
+    drawText(gMeme.txts[0].line);
 }
 
 function changeColor(color) {
     console.log(color);
     gMeme.txts[0].color = color;
     console.log(gMeme);
-    creatLine(gMeme.txts[0].line);
+    drawText(gMeme.txts[0].line);
+}
+
+
+function downloadImg(elLink) {
+    var canvas = document.getElementById('canvas');// ,ak this two in func-apear a lot
+    var ctx = canvas.getContext('2d');
+    var imgContent = canvas.toDataURL('image/jpeg');
+    elLink.href = imgContent
 }
 
 
