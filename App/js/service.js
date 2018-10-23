@@ -1,7 +1,8 @@
 'use strict'
 
+var gImgsFilter = 'all';
 
-var gImgs = [   
+var gImgs = [
     { id: 1, url: 'img/angry-man.jpg', keywords: ['angry'] },
     { id: 2, url: 'img/baby-dog.jpg', keywords: ['cute'] },
     { id: 3, url: 'img/baby-winner.jpg', keywords: ['happy'] },
@@ -29,8 +30,14 @@ var gImgs = [
     { id: 25, url: 'img/trump-finger-2.jpg', keywords: ['sure'] },
 ];
 
-function getImgs() {
-    return gImgs;
+
+function getImgs(filterTag) {
+    if(filterTag === 'all') return gImgs;
+    return gImgs.filter((img) => {
+        return img.keywords.some(keyword => {
+            return keyword.includes(filterTag);
+        })
+    })
 }
 
 var gMeme = {
@@ -51,9 +58,10 @@ function textStyle(txt) {
     ctx.fillText(txt, 100, 100)
 }
 
-function enlargeText(){
-    var text=gMeme.txts;
-    var textSize=text.size;
-    textSize=textSize++;
+function enlargeText() {
+    var text = gMeme.txts;
+    var textSize = text.size;
+    textSize = textSize++;
     console.log(gMeme);
 }
+
