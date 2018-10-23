@@ -14,13 +14,14 @@
     <a href="#" class="download" onclick="downloadImg(this)" download="my-img.jpg" >
             Download as jpeg
           </a>
-    <div id="btnsContainer">
-        <button onclick="onSetFilter('all')"> Show All</button>
-        <button onclick="onSetFilter('angry')"> Angry</button>
-        <button onclick="onSetFilter('cute')"> Cute</button>
-        <button onclick="onSetFilter('happy')"> Happy</button>
-        <button onclick="onSetFilter('sure')"> Sure</button>
-        <button onclick="onSetFilter('evil')"> Evil</button>
+    <form autocomplete="off" action="/action_page.php">
+        <div class="autocomplete" style="width:300px;">
+            <input id="myInput" type="text" oninput="onGetImgs(this.value)" 
+            name="myCountry" placeholder="Country">
+        </div>
+        <input type="submit">
+    </form>
+    <div id="tagsContainer">
     </div>
     <section class="gallery">
         <ul class="img-container"></ul>
