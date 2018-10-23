@@ -54,17 +54,13 @@ function getImgs(filterTag) {
     })
 }
 
-function getSrc(id){
-     var findImgWithId=gImgs.find(function(img){
-        if(img.id===id)return img;
+function getSrc(id) {
+    var findImgWithId = gImgs.find(function (img) {
+        if (img.id === id) return img;
     });
-    gMeme.id=findImgWithId.id;
+    gMeme.id = findImgWithId.id;
     return findImgWithId.url;
 }
-
-function returnGmeme(){
-    return gMeme;
-// getPopularKeywords()
 
 function getPopularKeywords() {
     var popKeywordsMap = {};
@@ -87,6 +83,10 @@ function getPopularKeywords() {
             }
         }
     }
+}
+
+function returnGmeme() {
+    return gMeme;
 }
 
 var gMeme = {
@@ -167,5 +167,6 @@ function downloadImg(elLink) {
     var imgContent = canvas.toDataURL('image/jpeg');
     elLink.href = imgContent
 }
+
 
 
