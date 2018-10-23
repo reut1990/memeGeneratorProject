@@ -10,14 +10,15 @@
 </head>
 
 <body onload="init()">
-        <div id="btnsContainer">
-                <button onclick="onSetFilter('all')"> Show All</button>
-                <button onclick="onSetFilter('angry')"> Angry</button>
-                <button onclick="onSetFilter('cute')"> Cute</button>
-                <button onclick="onSetFilter('happy')"> Happy</button>
-                <button onclick="onSetFilter('sure')"> Sure</button>
-                <button onclick="onSetFilter('evil')"> Evil</button>
-              </div>
+    <form autocomplete="off" action="/action_page.php">
+        <div class="autocomplete" style="width:300px;">
+            <input id="myInput" type="text" oninput="onGetImgs(this.value)" 
+            name="myCountry" placeholder="Country">
+        </div>
+        <input type="submit">
+    </form>
+    <div id="tagsContainer">
+    </div>
     <section class="gallery">
         <ul class="img-container"></ul>
     </section>
@@ -39,21 +40,21 @@
 
 
     <section class="editor-container">
-        <input type="text" value="Enter text" placeholder="Enter text"/>
+        <input type="text" value="Enter text" placeholder="Enter text" />
         <div class=buttons-edit>
-          <div class="delete"🗑></div>
-          <div class="text-style">
-              <div class="color">✨</div>
-              <div class="shadow">-Å-</div>
-              <div class="font-size">Å</div>
-           </div>
-          <div class="text-size">
-              <div onclick="onBiggerText()" class="biggerText">➕</div>
-              <div onclick="onSmallerText()"class="smallerText">➖</div>
-           </div>
-          <div class="alignment">alignement</div>
-        </div> 
-     </section>
+            <div class="delete" 🗑></div>
+            <div class="text-style">
+                <div class="color">✨</div>
+                <div class="shadow">-Å-</div>
+                <div class="font-size">Å</div>
+            </div>
+            <div class="text-size">
+                <div onclick="onBiggerText()" class="biggerText">➕</div>
+                <div onclick="onSmallerText()" class="smallerText">➖</div>
+            </div>
+            <div class="alignment">alignement</div>
+        </div>
+    </section>
     <!-- font family, font color, font size, L-R alignment, Up-Down alignment, delete line -->
     <script src="js/service.js"></script>
     <script src="js/main.js"></script>
