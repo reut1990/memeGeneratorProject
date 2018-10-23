@@ -1,0 +1,6 @@
+onBiggerText(){
+   
+}
+onSmallerText(){
+
+}
