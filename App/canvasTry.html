@@ -10,27 +10,77 @@
 </head>
 
 <body>
-        <canvas id="myCanvas" width="1000" height="400" style="outline:1px solid green"></canvas>
+    <canvas id="canvas" width="1000" height="400" style="outline:1px solid green"></canvas>
 
     <section class="editor-container">
-        <input type="text" value="Enter text" placeholder="Enter text"/>
+        <input type="text" placeholder="Enter Text" oninput="creatLine(this.value)"/>
         <div class=buttons-edit>
-          <div class="delete"🗑></div>
-          <div class="text-style">
-              <div class="color">✨</div>
-              <div class="shadow">-Å-</div>
-              <div class="font-size">Å</div>
-           </div>
-          <div class="text-size">
-              <div onclick="onBiggerText()" class="biggerText">➕</div>
-              <div onclick="onSmallerText()"class="smallerText">➖</div>
-           </div>
-          <div class="alignment">alignement</div>
-        </div> 
-     </section>
+            <div class="delete" 🗑></div>
+            <div class="text-style">
+                <div class="color">✨</div>
+                <div class="shadow">-Å-</div>
+                <div class="font-size">Å</div>
+            </div>
+            <div class="text-size">
+                <div onclick="onBiggerText()" class="biggerText">➕</div>
+                <div onclick="onSmallerText()" class="smallerText">➖</div>
+            </div>
+            <div class="alignment">alignement</div>
+        </div>
+    </section>
     <!-- font family, font color, font size, L-R alignment, Up-Down alignment, delete line -->
     <script src="main.js"></script>
     <script src="service.js"></script>
+    <script>
+        canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        // canvas.width = window.innerWidth / 2;
+        // canvas.height = window.innerHeight / 2;
+        // ctx = canvas.getContext('2d');
+        // main
+        function onBiggerText() {
+            enlargeText();
+        }
+        function onSmallerText() {
+           decreaseText();
+        }
+        //service
+        var gImgs = [{ id: 1, url: 'img/angry man.jpg', keywords: ['happy'] }];
+
+        var gMeme = {
+            selectedImgId: 5,
+            txts: [
+                {
+                    line: 'I never eat Falafel',
+                    size: 20,
+                    align: 'left',
+                    color: 'red'
+                }
+            ]
+        }
+
+       
+
+        function enlargeText() {
+            var text = gMeme.txts;
+            console.log(text);
+            var textSize =text[0].size+1;
+            console.log(textSize);
+            // textSize = textSize+1;
+            // console.log(textSize);
+            gMeme.txts[0].size=textSize;
+            console.log(gMeme);
+            
+            
+        }
+
+        
+        function creatLine(txt) {
+            ctx.fillStyle = 'black'
+            ctx.font = '50px Arial'
+            ctx.fillText(txt, 100, 100)
+        }
+    </script>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
-onBiggerText(){
-   
+function onBiggerText(){
+   enlargeText();
 }
-onSmallerText(){
+function onSmallerText(){
 
 }

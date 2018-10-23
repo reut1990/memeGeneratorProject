@@ -14,3 +14,16 @@ var gMeme = {
         }
     ]
 }
+
+function textStyle(txt) {
+    ctx.fillStyle = 'black'
+    ctx.font = '50px Arial'
+    ctx.fillText(txt, 100, 100)
+}
+
+function enlargeText(){
+    var text=gMeme.txts;
+    var textSize=text.size;
+    textSize=textSize++;
+    console.log(gMeme);
+}
