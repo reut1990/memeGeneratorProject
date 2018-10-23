@@ -10,103 +10,103 @@
 </head>
 
 <body>
-    <canvas id="canvas" width="1000" height="400" style="outline:1px solid green"></canvas>
+    <!-- <canvas id="canvas" width="1000" height="400" style="outline:1px solid green"></canvas> -->
 
-    <section class="editor-container">
-        <input type="text" placeholder="Enter Text" oninput="creatLine(this.value)" />
-        <div class=buttons-edit>
-            <div class="delete" 🗑></div>
-            <div class="text-style">
-                <input type="color" id="html5colorpicker" onchange="onClickColor(this.value)" value="#ff0000" style="width:25%;">
-                <div class="shadow">-Å-</div>
-                <div class="font-size">Å</div>
+    <!-- <section class="editor-container">
+            <input type="text" placeholder="Enter Text" oninput="creatLine(this.value)" />
+            <div class=buttons-edit>
+                <div class="delete" 🗑></div>
+                <div class="text-style">
+                    <input type="color" id="html5colorpicker" onchange="onClickColor(this.value)" value="#ff0000" style="width:25%;">
+                    <div class="shadow">-Å-</div>
+                    <div class="font-size">Å</div>
+                </div>
+                <div class="text-size">
+                    <div onclick="onBiggerText()" class="biggerText">➕</div>
+                    <div onclick="onSmallerText()" class="smallerText">➖</div>
+                </div>
+                <div class="alignment">alignement</div>
             </div>
-            <div class="text-size">
-                <div onclick="onBiggerText()" class="biggerText">➕</div>
-                <div onclick="onSmallerText()" class="smallerText">➖</div>
-            </div>
-            <div class="alignment">alignement</div>
-        </div>
-    </section>
+        </section> -->
     <!-- font family, font color, font size, L-R alignment, Up-Down alignment, delete line -->
     <script src="main.js"></script>
     <script src="service.js"></script>
     <script>
-        canvas = document.getElementById('canvas');
-        var ctx = canvas.getContext('2d');
+        // canvas = document.getElementById('canvas');
+        // var ctx = canvas.getContext('2d');
         // canvas.width = window.innerWidth / 2;
         // canvas.height = window.innerHeight / 2;
         // ctx = canvas.getContext('2d');
         // main
-        function onBiggerText() {
-            enlargeText();
+        // function onBiggerText() {
+        //     enlargeText();
 
-        }
-        function onSmallerText() {
-            decreaseText();
-        }
-        function onClickColor(color) {
-               console.log(color);
-               changeColor(color);
-        }
+        // }
+        // function onSmallerText() {
+        //     decreaseText();
+        // }
+        // function onClickColor(color) {
+        //        console.log(color);
+        //        changeColor(color);
+        // }
         //service
         var gImgs = [{ id: 1, url: 'img/angry man.jpg', keywords: ['happy'] }];
 
-        var gMeme = {
-            selectedImgId: 5,
-            txts: [
-                {
-                    line: 'I never eat Falafel',
-                    size: 20,
-                    align: 'left',
-                    color: 'red',
-                    font: 'arial'
-                }
-            ]
-        }
+        // var gMeme = {
+        //     selectedImgId: 5,
+        //     txts: [
+        //         {
+        //             line: 'I never eat Falafel',
+        //             size: 20,
+        //             align: 'left',
+        //             color: 'red',
+        //             font: 'arial'
+        //         }
+        //     ]
+        // }
 
 
 
-        function enlargeText() {
-            var text = gMeme.txts;
-            console.log(text);
-            var textSize = text[0].size + 1;
-            console.log(textSize);
-            // textSize = textSize+1;
-            // console.log(textSize);
-            gMeme.txts[0].size = textSize;
-            console.log(gMeme);
-            creatLine(gMeme.txts[0].line);
-        }
+        // function enlargeText() {
+        //     var text = gMeme.txts;
+        //     console.log(text);
+        //     var textSize = text[0].size + 1;
+        //     console.log(textSize);
+        //     // textSize = textSize+1;
+        //     // console.log(textSize);
+        //     gMeme.txts[0].size = textSize;
+        //     console.log(gMeme);
+        //     creatLine(gMeme.txts[0].line);
+        // }
 
-        function decreaseText() {// unit with the enarge
-            var text = gMeme.txts;
-            console.log(text);
-            var textSize = text[0].size - 1;
-            console.log(textSize);
-            // textSize = textSize+1;
-            // console.log(textSize);
-            gMeme.txts[0].size = textSize;
-            console.log(gMeme);
-            creatLine(gMeme.txts[0].line);
-        }
+        // function decreaseText() {// unit with the enarge
+        //     var text = gMeme.txts;
+        //     console.log(text);
+        //     var textSize = text[0].size - 1;
+        //     console.log(textSize);
+        //     // textSize = textSize+1;
+        //     // console.log(textSize);
+        //     gMeme.txts[0].size = textSize;
+        //     console.log(gMeme);
+        //     creatLine(gMeme.txts[0].line);
+        // }
 
-        function changeColor(color){
-            console.log(color);
-            gMeme.txts[0].color=color;
-            console.log(gMeme);
-            creatLine(gMeme.txts[0].line);
-        }
+        // function changeColor(color){
+        //     console.log(color);
+        //     gMeme.txts[0].color=color;
+        //     console.log(gMeme);
+        //     creatLine(gMeme.txts[0].line);
+        // }
 
 
-        function creatLine(txt) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            var text = gMeme.txts[0];
-            text.line = txt;
-            ctx.fillStyle = text.color;
-            ctx.font = `${text.size}px ${text.font}`
-            ctx.fillText(txt, 100, 100)
-        }
+        // function creatLine(txt) {
+        //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+        //     var text = gMeme.txts[0];
+        //     text.line = txt;
+        //     ctx.fillStyle = text.color;
+        //     ctx.font = `${text.size}px ${text.font}`
+        //     ctx.fillText(txt, 100, 100)
+        // }
     </script>
 </body>
 

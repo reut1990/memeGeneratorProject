@@ -10,16 +10,37 @@
 </head>
 
 <body onload="init()">
-        <div id="btnsContainer">
-                <button onclick="onSetFilter('all')"> Show All</button>
-                <button onclick="onSetFilter('angry')"> Angry</button>
-                <button onclick="onSetFilter('cute')"> Cute</button>
-                <button onclick="onSetFilter('happy')"> Happy</button>
-                <button onclick="onSetFilter('sure')"> Sure</button>
-                <button onclick="onSetFilter('evil')"> Evil</button>
-              </div>
+    <div id="btnsContainer">
+        <button onclick="onSetFilter('all')"> Show All</button>
+        <button onclick="onSetFilter('angry')"> Angry</button>
+        <button onclick="onSetFilter('cute')"> Cute</button>
+        <button onclick="onSetFilter('happy')"> Happy</button>
+        <button onclick="onSetFilter('sure')"> Sure</button>
+        <button onclick="onSetFilter('evil')"> Evil</button>
+    </div>
     <section class="gallery">
         <ul class="img-container"></ul>
+    </section>
+
+    <section class="canvas">
+        <canvas id="canvas" width="1000" height="400" style="outline:1px solid green"></canvas>
+    </section>
+
+    <section class="editor-container">
+        <input type="text" placeholder="Enter Text" oninput="creatLine(this.value)" />
+        <div class=buttons-edit>
+            <div class="delete" 🗑></div>
+            <div class="text-style">
+                <input type="color" id="html5colorpicker" onchange="onClickColor(this.value)" value="#ff0000" style="width:25%;">
+                <div class="shadow">-Å-</div>
+                <div class="font-size">Å</div>
+            </div>
+            <div class="text-size">
+                <div onclick="onBiggerText()" class="biggerText">➕</div>
+                <div onclick="onSmallerText()" class="smallerText">➖</div>
+            </div>
+            <div class="alignment">alignement</div>
+        </div>
     </section>
 
 
@@ -39,21 +60,21 @@
 
 
     <section class="editor-container">
-        <input type="text" value="Enter text" placeholder="Enter text"/>
+        <input type="text" value="Enter text" placeholder="Enter text" />
         <div class=buttons-edit>
-          <div class="delete"🗑></div>
-          <div class="text-style">
-              <div class="color">✨</div>
-              <div class="shadow">-Å-</div>
-              <div class="font-size">Å</div>
-           </div>
-          <div class="text-size">
-              <div onclick="onBiggerText()" class="biggerText">➕</div>
-              <div onclick="onSmallerText()"class="smallerText">➖</div>
-           </div>
-          <div class="alignment">alignement</div>
-        </div> 
-     </section>
+            <div class="delete" 🗑></div>
+            <div class="text-style">
+                <div class="color">✨</div>
+                <div class="shadow">-Å-</div>
+                <div class="font-size">Å</div>
+            </div>
+            <div class="text-size">
+                <div onclick="onBiggerText()" class="biggerText">➕</div>
+                <div onclick="onSmallerText()" class="smallerText">➖</div>
+            </div>
+            <div class="alignment">alignement</div>
+        </div>
+    </section>
     <!-- font family, font color, font size, L-R alignment, Up-Down alignment, delete line -->
     <script src="js/service.js"></script>
     <script src="js/main.js"></script>

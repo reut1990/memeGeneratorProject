@@ -2,6 +2,20 @@
 
 var gImgsFilter = 'all';
 
+var gMeme = {
+    selectedImgId: 5,
+    txts: [
+        {
+            line: 'I never eat Falafel',
+            size: 20,
+            align: 'left',
+            color: 'red',
+            font: 'arial'
+        }
+    ]
+}
+
+
 var gImgs = [
     { id: 1, url: 'img/angry-man.jpg', keywords: ['angry'] },
     { id: 2, url: 'img/baby-dog.jpg', keywords: ['cute'] },
@@ -32,7 +46,7 @@ var gImgs = [
 
 
 function getImgs(filterTag) {
-    if(filterTag === 'all') return gImgs;
+    if (filterTag === 'all') return gImgs;
     return gImgs.filter((img) => {
         return img.keywords.some(keyword => {
             return keyword.includes(filterTag);
@@ -40,18 +54,12 @@ function getImgs(filterTag) {
     })
 }
 
-var gMeme = {
-    selectedImgId: 5,
-    txts: [
-        {
-            line: 'I never eat Falafel',
-            size: 20,
-            align: 'left',
-            color: 'red'
-        }
-    ]
-}
 
+// function getCanvasAndCtx() {
+//     var canvas = document.getElementById('canvas');
+//     var ctx = canvas.getContext('2d');
+//     return{canvas, ctx};
+// }
 function textStyle(txt) {
     ctx.fillStyle = 'black'
     ctx.font = '50px Arial'
@@ -60,8 +68,33 @@ function textStyle(txt) {
 
 function enlargeText() {
     var text = gMeme.txts;
-    var textSize = text.size;
-    textSize = textSize++;
+    console.log(text);
+    var textSize = text[0].size + 1;
+    console.log(textSize);
+    // textSize = textSize+1;
+    // console.log(textSize);
+    gMeme.txts[0].size = textSize;
     console.log(gMeme);
+    creatLine(gMeme.txts[0].line);
 }
+
+function decreaseText() {// unit with the enarge
+    var text = gMeme.txts;
+    console.log(text);
+    var textSize = text[0].size - 1;
+    console.log(textSize);
+    // textSize = textSize+1;
+    // console.log(textSize);
+    gMeme.txts[0].size = textSize;
+    console.log(gMeme);
+    creatLine(gMeme.txts[0].line);
+}
+
+function changeColor(color) {
+    console.log(color);
+    gMeme.txts[0].color = color;
+    console.log(gMeme);
+    creatLine(gMeme.txts[0].line);
+}
+
 
