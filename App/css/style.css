@@ -3,6 +3,19 @@
     padding: 20px;
 }
 
+.editor-container input{
+    width: 90%;
+}
+
+.buttons-edit ,.text-style,.text-size {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.text-style,.text-size,.delete,.alignment{
+        border: 2px solid black;
+        padding: 10px;
+
 
 
 
