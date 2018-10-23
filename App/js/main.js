@@ -16,7 +16,7 @@ function renderImgs(imgs) {
         var img = imgs[i];
         strHtmls += `
         <li>
-        <img onclick="drawImage(${img.id})" src=${img.url} alt="">
+        <img onclick="drawImage(${img.id}), onUpdateSearchKeyCount(${img.keywords})" src=${img.url} alt="">
     </li>
         `;
     }
@@ -188,4 +188,8 @@ function autocomplete(inp) {
     document.addEventListener("click", function (e) {
         closeAllLists(e.target);
     });
+}
+
+function onUpdateSearchKeyCount(imgKeywords) {
+    UpdateSearchKeyCount(imgKeywords);
 }

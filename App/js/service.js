@@ -1,6 +1,6 @@
 'use strict'
 
-var gImgsFilter = 'all';
+var gCountKeySearchMap = {};
 
 var gMeme = {
     selectedImgId: 5,
@@ -14,7 +14,6 @@ var gMeme = {
         }
     ]
 }
-
 
 var gImgs = [
     { id: 1, url: 'img/angry-man.jpg', keywords: ['angry', 'surprised'] },
@@ -62,7 +61,7 @@ function getSrc(id) {
     return findImgWithId.url;
 }
 
-function getPopularKeywords() {
+function getFivePopularKeywords() {
     var popKeywordsMap = {};
     gImgs.forEach((img) => {
         img.keywords.forEach(keyword => {
@@ -71,7 +70,6 @@ function getPopularKeywords() {
         })
     })
 
-    for (var key in popKeywordsMap) {
         var max = 0;
         var output = [];
         for (var key in popKeywordsMap) {
@@ -83,7 +81,6 @@ function getPopularKeywords() {
             }
         }
     }
-}
 
 function returnGmeme() {
     return gMeme;
@@ -168,5 +165,7 @@ function downloadImg(elLink) {
     elLink.href = imgContent
 }
 
-
+function UpdateSearchKeyCount(imgKeywords) {
+    
+}
 
