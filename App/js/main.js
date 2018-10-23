@@ -1,12 +1,20 @@
-function onBiggerText(){
-   enlargeText();
-}
-function onSmallerText(){
+// function onBiggerText(){
+//    enlargeText();
+// }
+// function onSmallerText(){
+// }
+
+function init() {
+    onSetFilter('all');
 }
 
-function renderProjs() {
+function onSetFilter(statusFilter) {
+    var imgs = getImgs(statusFilter);
+    renderImgs(imgs);
+}
+
+function renderImgs(imgs) {
     var elPortfolioContainer = document.querySelector('.img-container');
-    var imgs = getImgs();
     console.log(imgs);
     var strHtmls = '';
     for (var i = 0; i < imgs.length; i++) {
