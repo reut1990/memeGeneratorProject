@@ -110,7 +110,7 @@ function renderCanvas() {
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
     var newImg = new Image()
-    newImg.src = '' + imgSrc;
+    newImg.src = imgSrc;
     newImg.onload = function () {
         ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height);
         meme.txts.forEach(line => {
