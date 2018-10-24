@@ -2,7 +2,7 @@
 function init() {
     onGetImgs('all');
     autocomplete(document.querySelector(".myInput"));
-    renderEditors();
+    renderdefualtEditors();
 }
 
 function onGetImgs(filterTag) {
@@ -28,13 +28,13 @@ function renderdefualtEditors() {
     var elcontainer = document.querySelector('.container');
     var strHtmls = '';
     for (var i = 0; i < 2; i++) {
-        strHtmls += editorSection();
+        strHtmls += editorSection(i);
     }
     elcontainer.innerHTML = strHtmls;
 
 }
 
-function editorSection(){
+function editorSection(i){
     return `<section class="editor-container"  id=${i}>
     <input type="text" placeholder="Enter Text" oninput="onDrawText(this.value, ${i})" />
     <div class=buttons-edit>
