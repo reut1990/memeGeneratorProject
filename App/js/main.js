@@ -2,6 +2,7 @@
 function init() {
     onGetImgs('all');
     autocomplete(document.getElementById("myInput"));
+    renderEditors();
 }
 
 function onGetImgs(filterTag) {
@@ -21,6 +22,34 @@ function renderImgs(imgs) {
         `;
     }
     elPortfolioContainer.innerHTML = strHtmls;
+}
+
+function renderEditors(){
+    var elcontainer = document.querySelector('.container');
+    var strHtmls = '';
+    for (var i = 0; i < 2; i++) {
+        strHtmls+=`
+        <section class="editor-container"  id=${i}>
+        <input type="text" placeholder="Enter Text" oninput="drawText(this.value)" />
+        <div class=buttons-edit>
+            <div class="delete" 🗑></div>
+            <div class="text-style">
+                <input type="color" id="html5colorpicker" onchange="onClickColor(this.value)" value="#ff0000" style="width:25%;">
+                <div class="shadow">-Å-</div>
+                <div class="font-size">Å</div>
+            </div>
+            <div class="text-size">
+                <div onclick="onBiggerText()" class="biggerText">➕</div>
+                <div onclick="onSmallerText()" class="smallerText">➖</div>
+            </div>
+            <div class="alignment">alignement</div>
+            <div class="add-line" onClick="addLine">add-line</div>
+        </div>
+    </section>
+         `
+    }
+   elcontainer.innerHTML=strHtmls;
+
 }
 
 function renderTags() {
@@ -54,7 +83,7 @@ function drawText(txt) {
 }
 
 function drawImage(id) {
-    var imgSrc = getSrc(id);
+    var imgSrc = getImg(id).url;
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
     console.log(imgSrc);

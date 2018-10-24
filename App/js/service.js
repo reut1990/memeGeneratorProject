@@ -6,13 +6,21 @@ var gMeme = {
     selectedImgId: 5,
     txts: [
         {
+            id:0,
             line: 'I never eat Falafel',
             size: 20,
             align: 'left',
-            color: 'red',
-            font: 'arial'
+            color: 'red'
+        },
+        {
+            id:1,
+            line: 'I never eat Falafel',
+            size: 20,
+            align: 'left',
+            color: 'red'
         }
     ]
+    
 }
 
 var gImgs = [
@@ -53,12 +61,12 @@ function getImgs(filterTag) {
     })
 }
 
-function getSrc(id) {
+function getImg(id) {
     var findImgWithId = gImgs.find(function (img) {
         if (img.id === id) return img;
     });
     gMeme.id = findImgWithId.id;
-    return findImgWithId.url;
+    return findImgWithId;
 }
 
 function getFivePopularKeywords() {
@@ -84,18 +92,6 @@ function getFivePopularKeywords() {
 
 function returnGmeme() {
     return gMeme;
-}
-
-var gMeme = {
-    selectedImgId: 5,
-    txts: [
-        {
-            line: 'I never eat Falafel',
-            size: 20,
-            align: 'left',
-            color: 'red'
-        }
-    ]
 }
 
 // function getCanvasAndCtx() {
