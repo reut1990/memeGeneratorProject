@@ -3,6 +3,7 @@ function init() {
     onGetImgs('all');
     autocomplete(document.querySelector(".myInput"));
     renderEditors();
+    renderTags();
 }
 
 function onGetImgs(filterTag) {
@@ -11,17 +12,17 @@ function onGetImgs(filterTag) {
 }
 
 function renderImgs(imgs) {
-    var elPortfolioContainer = document.querySelector('.img-container');
+    var elImgcontainer = document.querySelector('.img-container');
     var strHtmls = '';
     for (var i = 0; i < imgs.length; i++) {
         var img = imgs[i];
         strHtmls += `
         <li>
-        <img onclick="drawImage(${img.id}), onUpdateSearchKeyCount(${img.id})" src=${img.url} alt="">
+        <img onclick="drawImage(${img.id})" src=${img.url} alt="">
     </li>
         `;
     }
-    elPortfolioContainer.innerHTML = strHtmls;
+    elImgcontainer.innerHTML = strHtmls;
 }
 
 function renderEditors(){
@@ -52,9 +53,7 @@ function renderEditors(){
 
 }
 
-function renderTags() {
-    var fivePopKey = getPopularKeywords();
-}
+
 function onBiggerText() {
     enlargeText();
 
@@ -84,7 +83,6 @@ function drawText(txt, id) {
 }
 
 function drawImage(id) {
-    console.log(id);
     var img = getImg(id);
     var imgSrc=img.url;
     var canvas = document.getElementById('canvas');
@@ -100,7 +98,8 @@ function drawImage(id) {
     elShowBtn.style.display = 'inline';
     var elDownload = document.querySelector('.download');
     elDownload.style.display = 'inline-block';
-
+    onUpdateSearchKeyCount(id);
+    renderTags();
 }
 
 function onShowList() {
@@ -224,3 +223,15 @@ function autocomplete(inp) {
 function onUpdateSearchKeyCount(imgId) {
     UpdateSearchKeyCount(imgId);
 }
+
+function renderTags() {
+    var fourKeywords = getFivePopularKeywords();
+    var eltagsContainer = document.querySelector('.tags');
+    var strHtmls = '';
+    for (var i = 0; i < fourKeywords.length; i++) {
+        strHtmls += `
+        <span class="size-${i+1}" onclick="onGetImgs('${fourKeywords[i]}')">${fourKeywords[i]}</span>`;
+    }
+    eltagsContainer.innerHTML = strHtmls;
+}
+    

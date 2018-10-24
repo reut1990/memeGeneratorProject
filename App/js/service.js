@@ -1,30 +1,38 @@
 'use strict'
 
-var gCountKeySearchMap = {};
+var gCountKeySearchMap = {
+    happy: 3,
+    evil: 1,
+    cute: 11,
+    sure: 8,
+    mindblown: 2,
+    baby: 5
+
+};
 
 var gMeme = {
     selectedImgId: 5,
     txts: [
         {
-            id:0,
+            id: 0,
             line: 'I never eat Falafel',
             size: 20,
             align: 'left',
             color: 'red',
-            posy:100,
-            posY:100
+            posy: 100,
+            posY: 100
         },
         {
-            id:1,
+            id: 1,
             line: 'I never eat Falafel',
             size: 20,
             align: 'left',
             color: 'red',
-            posy:300,
-            posY:300
+            posy: 300,
+            posY: 300
         }
     ]
-    
+
 }
 
 var gImgs = [
@@ -66,34 +74,13 @@ function getImgs(filterTag) {
 }
 
 function getImg(id) {
-    console.log(id);
     var findImgWithId = gImgs.find(function (img) {
         if (img.id === id) return img;
     });
-    gMeme.selectedImgId= findImgWithId.id;
+    gMeme.selectedImgId = findImgWithId.id;
     return findImgWithId;
 }
 
-function getFivePopularKeywords() {
-    var popKeywordsMap = {};
-    gImgs.forEach((img) => {
-        img.keywords.forEach(keyword => {
-            if (!popKeywordsMap[keyword]) popKeywordsMap[keyword] = 1;
-            else popKeywordsMap[keyword]++;
-        })
-    })
-
-        var max = 0;
-        var output = [];
-        for (var key in popKeywordsMap) {
-            if (popKeywordsMap[key] > max) {
-                max = popKeywordsMap[key];
-                output = [key];
-            } else if (popKeywordsMap[key] === max) {
-                output.push(key);
-            }
-        }
-    }
 
 function returnGmeme() {
     return gMeme;
@@ -167,9 +154,36 @@ function downloadImg(elLink) {
 }
 
 function UpdateSearchKeyCount(imgId) {
-    var img = getImg(imgId);
-    console.log(img);
-    
-
+    var value = document.querySelector('.myInput').value;
+    var imgKeywords = getImg(imgId).keywords;
+    if (value === '') return;
+    var filterdKeywords = imgKeywords.filter(keyword => {
+        return keyword.includes(value);
+    })
+    if (filterdKeywords.length > 1) return;
+    else if (gCountKeySearchMap[filterdKeywords.toString()]) gCountKeySearchMap[filterdKeywords.toString()]++;
+    else gCountKeySearchMap[filterdKeywords.toString()] = 1;
 }
+
+function getFivePopularKeywords() {
+var countMapCopy = Object.assign({}, gCountKeySearchMap);
+    var fourPopKeywords = [];
+    for (let i = 0; i < 5; i++) {
+        var max = 0;
+        for (let keyword in countMapCopy) {
+            // console.log(gCountKeySearchMap[keyword]);
+            if (countMapCopy[keyword] > max) max = countMapCopy[keyword];
+        }
+        for (let keyword in countMapCopy) {
+            if (countMapCopy[keyword] === max) {
+                fourPopKeywords.push(keyword);
+                delete countMapCopy[keyword];
+                if(fourPopKeywords.length === 5) return fourPopKeywords;
+            }
+        }
+    }
+}
+
+
+
 

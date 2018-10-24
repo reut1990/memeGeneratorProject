@@ -44,45 +44,39 @@ img {
     object-fit: cover;
 }
 
-.show-list{
+.show-list {
     display: none;
 }
 
-.download{
+.download {
     display: none;
 }
-
-
-
-
-
-
 
 .autocomplete {
     /*the container must be positioned relative:*/
     position: relative;
     display: inline-block;
-  }
-  
-  input {
+}
+
+input {
     border: 1px solid transparent;
     background-color: #f1f1f1;
     padding: 10px;
     font-size: 16px;
-  }
-  
-  input[type=text] {
+}
+
+input[type=text] {
     background-color: #f1f1f1;
     width: 100%;
-  }
-  
-  input[type=submit] {
+}
+
+input[type=submit] {
     background-color: DodgerBlue;
     color: #fff;
     cursor: pointer;
-  }
-  
-  .autocomplete-items {
+}
+
+.autocomplete-items {
     position: absolute;
     border: 1px solid #d4d4d4;
     border-bottom: none;
@@ -92,22 +86,46 @@ img {
     top: 100%;
     left: 0;
     right: 0;
-  }
-  
-  .autocomplete-items div {
+}
+
+.autocomplete-items div {
     padding: 10px;
     cursor: pointer;
-    background-color: #fff; 
-    border-bottom: 1px solid #d4d4d4; 
-  }
-  
-  .autocomplete-items div:hover {
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.autocomplete-items div:hover {
     /*when hovering an item:*/
-    background-color: #e9e9e9; 
-  }
-  
-  .autocomplete-active {
+    background-color: #e9e9e9;
+}
+
+.autocomplete-active {
     /*when navigating through the items using the arrow keys:*/
-    background-color: DodgerBlue !important; 
-    color: #ffffff; 
-  }
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}
+
+
+
+/* tags text size classes */
+
+.size-5{
+    font-size: 10px;
+}
+
+.size-4{
+    font-size: 27px;
+}
+
+.size-3{
+    font-size: 35px;
+}
+
+.size-2{
+    font-size: 45px;
+}
+
+.size-1{
+    font-size: 60px;
+}
