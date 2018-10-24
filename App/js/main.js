@@ -1,7 +1,7 @@
 
 function init() {
     onGetImgs('all');
-    autocomplete(document.getElementById("myInput"));
+    autocomplete(document.querySelector(".myInput"));
     renderEditors();
 }
 
@@ -34,13 +34,13 @@ function renderEditors(){
         <div class=buttons-edit>
             <div class="delete" 🗑></div>
             <div class="text-style">
-                <input type="color" id="html5colorpicker" onchange="onClickColor(this.value)" value="#ff0000" style="width:25%;">
+                <input type="color" id="html5colorpicker" onchange="onClickColor(this.value, ${i})" value="#ff0000" style="width:25%;">
                 <div class="shadow">-Å-</div>
                 <div class="font-size">Å</div>
             </div>
             <div class="text-size">
-                <div onclick="onBiggerText()" class="biggerText">➕</div>
-                <div onclick="onSmallerText()" class="smallerText">➖</div>
+                <div onclick="onBiggerText(${i})" class="biggerText">➕</div>
+                <div onclick="onSmallerText(${i})" class="smallerText">➖</div>
             </div>
             <div class="alignment">alignement</div>
             <div class="add-line" onClick="addLine">add-line</div>

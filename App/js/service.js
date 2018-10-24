@@ -139,23 +139,23 @@ function createKeyArr() {
     return allKeywords;
 
 }
-function decreaseText() {// unit with the enarge
+function decreaseText(id) {// unit with the enarge
     var text = gMeme.txts;
     console.log(text);
-    var textSize = text[0].size - 1;
+    var textSize = text[id].size - 1;
     console.log(textSize);
     // textSize = textSize+1;
     // console.log(textSize);
     gMeme.txts[0].size = textSize;
     console.log(gMeme);
-    drawText(gMeme.txts[0].line);
+    drawText(gMeme.txts[id].line);
 }
 
-function changeColor(color) {
+function changeColor(color, id) {
     console.log(color);
     gMeme.txts[0].color = color;
     console.log(gMeme);
-    drawText(gMeme.txts[0].line);
+    drawText(gMeme.txts[id].line);
 }
 
 
