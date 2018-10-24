@@ -120,10 +120,9 @@ function returnGmeme() {
 // }
 
 function deleteLine(index){
- console.log(index, 'inDelete');
-    var lines=gMeme.txts;
+  var lines=gMeme.txts;
   lines.splice(index, 1);
-  console.log(lines);
+  renderCanvas();
 }
 
 function textStyle(txt) {

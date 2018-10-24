@@ -39,10 +39,10 @@ function renderdefualtEditors() {
 
 function editorSection(i) {
     return `
-    <section class="editor-container"  id=${i}>
+    <section class="editor-container"  id="${i}">
     <input type="text" placeholder="Enter Text" oninput="onDrawText(this.value, ${i})" />
     <div class="buttons-edit">
-        <div class="delete" oclick="onDeleteLine(${i})">🗑</div>
+        <div class="delete" onclick="onDeleteLine(${i})">🗑</div>
         <div class="text-style">
             <input type="color" id="html5colorpicker" onchange="onClickColor(this.value, ${i})" value="#ff0000" style="width:25%;">
             <div onclick="onDoShadow(${i})" class="shadow">-Å-</div>
@@ -93,7 +93,6 @@ function onAlignText(direction, id){
 }
 
 function onDeleteLine(id){
-    console.log('enter');
    deleteLine(id);
 }
 
