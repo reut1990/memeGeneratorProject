@@ -166,7 +166,10 @@ function downloadImg(elLink) {
     elLink.href = imgContent
 }
 
-function UpdateSearchKeyCount(imgKeywords) {
+function UpdateSearchKeyCount(imgId) {
+    var img = getImg(imgId);
+    console.log(img);
     
+
 }
 
