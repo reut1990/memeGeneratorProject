@@ -7,7 +7,7 @@
     width: 90%;
 }
 
-.buttons-edit, .text-style, .text-size {
+.buttons-edit, .text-style, .text-size .alignment{
     display: flex;
     flex-direction: row;
     justify-content: space-around;

@@ -39,8 +39,8 @@ function editorSection(i) {
     return `
     <section class="editor-container"  id=${i}>
     <input type="text" placeholder="Enter Text" oninput="onDrawText(this.value, ${i})" />
-    <div class=buttons-edit>
-        <div class="delete" 🗑></div>
+    <div class="buttons-edit">
+        <div class="delete" oclick="onDeleteLine(${i})">🗑</div>
         <div class="text-style">
             <input type="color" id="html5colorpicker" onchange="onClickColor(this.value, ${i})" value="#ff0000" style="width:25%;">
             <div onclick="onDoShadow(${i})" class="shadow">-Å-</div>
@@ -50,7 +50,7 @@ function editorSection(i) {
             <div onclick="onBiggerText(${i}, 1)" class="biggerText">➕</div>
             <div onclick="onSmallerText(${i},-1)" class="smallerText">➖</div>
         </div>
-        <div class="alignment">alignement</div>
+        <div class="alignment"><div onclick="onAlignText('left', ${i})">left</div><div onclick="onAlignText('center', ${i})">center</div><div onclick="onAlignText('right', ${i})">right</div></div>
         <div class="add-line" onClick="onAddLine()">add-line</div>
     </div>
     </section>
@@ -87,6 +87,15 @@ function onAddLine() {
     addLine();
 }
 
+function onAlignText(direction, id){
+    updateAlignment(direction, id);
+}
+
+function onDeleteLine(id){
+    console.log('enter');
+   deleteLine(id);
+}
+
 function renderNewLineEditor() {
     var meme = returnGmeme();
     var lines = meme.txts;
@@ -107,6 +116,8 @@ function renderCanvas() {
         meme.txts.forEach(line => {
             ctx.fillStyle = line.color;
             ctx.font = `${line.size}px ${line.font}`;
+            console.log(line.alignment);
+            ctx.textAlign=`${line.alignment}`;
             // ctx.globalCompositeOperation = 'source-over';
             //         // // hard-light
             addShadowToCanvas(line.shadow, ctx);
@@ -270,4 +281,8 @@ if (isShadow) {
     ctx.shadowOffsetY = 0;
     ctx.shadowBlur = 0;
 }
+}
+
+function addAlignmentToCanvas(direction, ctx){
+
 }

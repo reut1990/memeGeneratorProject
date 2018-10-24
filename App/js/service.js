@@ -20,9 +20,10 @@ var gMeme = {
             align: 'left',
             color: 'red',
             font: 'arial',
-            posX: 50,
+            posX: 500,
             posY: 50,
-            shadow: false
+            shadow: false,
+            alignment: 'center'
         },
         {
             id: 1,
@@ -31,9 +32,11 @@ var gMeme = {
             align: 'left',
             color: 'red',
             font: 'arial',
-            posX: 50,
+            posX: 500,
             posY: 350,
-            shadow: false
+            shadow: false,
+            alignment: 'center'
+
         }
     ]
 
@@ -115,6 +118,14 @@ function returnGmeme() {
 //     var ctx = canvas.getContext('2d');
 //     return{canvas, ctx};
 // }
+
+function deleteLine(index){
+ console.log(index, 'inDelete');
+    var lines=gMeme.txts;
+  lines.splice(index, 1);
+  console.log(lines);
+}
+
 function textStyle(txt) {
     ctx.fillStyle = 'black'
     ctx.font = '50px Arial'
@@ -224,35 +235,44 @@ function updateImage(id) {
     renderCanvas();
 }
 
+function updateAlignment(direction, id) {
+    // console.log(direction, id);
+    var lines = gMeme.txts;
+    //    console.log(lines[id]);
+    lines[id].alignment = direction;
+    console.log(lines[id].alignment);
+    renderCanvas();
+}
 
 // function UpdateSearchKeyCount(imgKeywords) {
 //     var img = getImg(imgId);
 //     console.log(img);
 // }
 
-function creatLineObj(){
- 
-    return         {
+function creatLineObj() {
+
+    return {
         id: gMeme.txts.length,
         line: '',
         size: 20,
         align: 'left',
         color: 'red',
         font: 'arial',
-        posX: 100,
+        posX: 500,
         posY: 200,
-        shadow:false
+        shadow: false,
+        alignment: 'center'
     }
 }
 
-function addLine(){
-   var lineObj=creatLineObj();
-   gMeme.txts.push(lineObj);
-   renderNewLineEditor();
+function addLine() {
+    var lineObj = creatLineObj();
+    gMeme.txts.push(lineObj);
+    renderNewLineEditor();
 }
 function doShadow(id) {
-   gMeme.txts[id].shadow = !gMeme.txts[id].shadow;
-    renderCanvas();    
+    gMeme.txts[id].shadow = !gMeme.txts[id].shadow;
+    renderCanvas();
 }
 
 
