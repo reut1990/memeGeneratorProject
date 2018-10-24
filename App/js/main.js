@@ -225,6 +225,6 @@ function autocomplete(inp) {
     });
 }
 
-function onUpdateSearchKeyCount(imgKeywords) {
-    UpdateSearchKeyCount(imgKeywords);
+function onUpdateSearchKeyCount(imgId) {
+    UpdateSearchKeyCount(imgId);
 }

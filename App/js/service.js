@@ -187,6 +187,7 @@ function updateImage(id){
 
 
 function UpdateSearchKeyCount(imgKeywords) {
-
+    var img = getImg(imgId);
+    console.log(img);
 }
 
