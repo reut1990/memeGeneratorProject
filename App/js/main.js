@@ -3,12 +3,14 @@ function init() {
     onGetImgs('all');
     autocomplete(document.querySelector(".myInput"));
     renderdefualtEditors();
-    renderTags();
 }
 
 function onGetImgs(filterTag) {
     var imgs = getImgs(filterTag);
     renderImgs(imgs);
+    UpdateSearchKeyCountByTag(filterTag);
+    renderTags();
+    saveToStorage('CountKeySearchMap', getFivePopularKeywords());
 }
 
 function renderImgs(imgs) {
@@ -18,7 +20,7 @@ function renderImgs(imgs) {
         var img = imgs[i];
         strHtmls += `
         <li>
-        <img onclick="onDrawImage(${img.id})"  src=${img.url} alt="">
+        <img onclick="onClickImage(${img.id})"  src=${img.url} alt="">
     </li>
         `;
     }
@@ -57,9 +59,7 @@ function editorSection(i) {
      `
 }
 
-function renderTags() {
-    getPopularKeywords();
-}
+
 function onBiggerText(id, sizeChange) {
     changeTextSize(id, sizeChange);
 
@@ -75,8 +75,9 @@ function onDrawText(txt, id) {
     updateText(txt, id);
 }
 
-function onDrawImage(id) {
+function onClickImage(id) {
     updateImage(id);
+    saveToStorage('CountKeySearchMap', getFivePopularKeywords());
 }
 
 function onDoShadow(txt, id) {
@@ -260,27 +261,28 @@ function onUpdateSearchKeyCount(imgId) {
 }
 
 function renderTags() {
-    var fourKeywords = getFivePopularKeywords();
+    var fiveKeywords = getFromStorage('CountKeySearchMap');
+    if (!fiveKeywords) fiveKeywords = getFivePopularKeywords();
     var eltagsContainer = document.querySelector('.tags');
     var strHtmls = '';
-    for (var i = 0; i < fourKeywords.length; i++) {
+    for (var i = 0; i < fiveKeywords.length; i++) {
         strHtmls += `
-        <span class="size-${i + 1}" onclick="onGetImgs('${fourKeywords[i]}')">${fourKeywords[i]}</span>`;
+        <span class="size-${i + 1}" onclick="onGetImgs('${fiveKeywords[i]}')">${fiveKeywords[i]}</span>`;
     }
     eltagsContainer.innerHTML = strHtmls;
 }
 
 function addShadowToCanvas(isShadow, ctx) {
-if (isShadow) {
-    ctx.shadowOffsetX = 5;
-    ctx.shadowOffsetY = 3;
-    ctx.shadowBlur = 2;
-    ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
-} else {
-    ctx.shadowOffsetX = 0;
-    ctx.shadowOffsetY = 0;
-    ctx.shadowBlur = 0;
-}
+    if (isShadow) {
+        ctx.shadowOffsetX = 5;
+        ctx.shadowOffsetY = 3;
+        ctx.shadowBlur = 2;
+        ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
+    } else {
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
+        ctx.shadowBlur = 0;
+    }
 }
 
 function addAlignmentToCanvas(direction, ctx){

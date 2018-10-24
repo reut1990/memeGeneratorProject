@@ -7,7 +7,6 @@ var gCountKeySearchMap = {
     sure: 8,
     mindblown: 2,
     baby: 5
-
 };
 
 var gMeme = {
@@ -88,26 +87,27 @@ function getImg(id) {
     return findImgWithId;
 }
 
-function getFivePopularKeywords() {
-    var popKeywordsMap = {};
-    gImgs.forEach((img) => {
-        img.keywords.forEach(keyword => {
-            if (!popKeywordsMap[keyword]) popKeywordsMap[keyword] = 1;
-            else popKeywordsMap[keyword]++;
-        })
-    })
+// function getFivePopularKeywords() {
+//     var popKeywordsMap = {};
+//     gImgs.forEach((img) => {
+//         img.keywords.forEach(keyword => {
+//             if (!popKeywordsMap[keyword]) popKeywordsMap[keyword] = 1;
+//             else popKeywordsMap[keyword]++;
+//         })
+//     })
 
-    var max = 0;
-    var output = [];
-    for (var key in popKeywordsMap) {
-        if (popKeywordsMap[key] > max) {
-            max = popKeywordsMap[key];
-            output = [key];
-        } else if (popKeywordsMap[key] === max) {
-            output.push(key);
-        }
-    }
-}
+//     var max = 0;
+//     var output = [];
+//     for (var key in popKeywordsMap) {
+//         if (popKeywordsMap[key] > max) {
+//             max = popKeywordsMap[key];
+//             output = [key];
+//         } else if (popKeywordsMap[key] === max) {
+//             output.push(key);
+//         }
+//     }
+    
+// }
 
 function returnGmeme() {
     return gMeme;
@@ -179,6 +179,11 @@ function UpdateSearchKeyCount(imgId) {
     if (filterdKeywords.length > 1) return;
     else if (gCountKeySearchMap[filterdKeywords.toString()]) gCountKeySearchMap[filterdKeywords.toString()]++;
     else gCountKeySearchMap[filterdKeywords.toString()] = 1;
+}
+
+function UpdateSearchKeyCountByTag(filterTag) {
+    if(gCountKeySearchMap[filterTag])gCountKeySearchMap[filterTag]++;
+    else gCountKeySearchMap[filterTag] = 1;
 }
 
 function getFivePopularKeywords() {
