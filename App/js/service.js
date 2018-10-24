@@ -186,8 +186,29 @@ function updateImage(id){
 }
 
 
-function UpdateSearchKeyCount(imgKeywords) {
-    var img = getImg(imgId);
-    console.log(img);
+// function UpdateSearchKeyCount(imgKeywords) {
+//     var img = getImg(imgId);
+//     console.log(img);
+// }
+
+function creatLineObj(){
+ 
+    return         {
+        id: gMeme.txts.length,
+        line: '',
+        size: 20,
+        align: 'left',
+        color: 'red',
+        font: 'arial',
+        posX: 100,
+        posY: 200,
+        shadow:false
+    }
+}
+
+function addLine(){
+   var lineObj=creatLineObj();
+   gMeme.txts.push(lineObj);
+   renderNewLineEditor();
 }
 

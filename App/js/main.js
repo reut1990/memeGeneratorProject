@@ -34,8 +34,9 @@ function renderdefualtEditors() {
 
 }
 
-function editorSection(i){
-    return `<section class="editor-container"  id=${i}>
+function editorSection(i) {
+    return `
+    <section class="editor-container"  id=${i}>
     <input type="text" placeholder="Enter Text" oninput="onDrawText(this.value, ${i})" />
     <div class=buttons-edit>
         <div class="delete" 🗑></div>
@@ -49,9 +50,9 @@ function editorSection(i){
             <div onclick="onSmallerText(${i},-1)" class="smallerText">➖</div>
         </div>
         <div class="alignment">alignement</div>
-        <div class="add-line" onClick="addLine">add-line</div>
+        <div class="add-line" onClick="onAddLine()">add-line</div>
     </div>
-</section>
+    </section>
      `
 }
 
@@ -73,9 +74,20 @@ function onDrawText(txt, id) {
     updateText(txt, id);
 }
 
-function onDrawImage(id){
-   updateImage(id);
+function onDrawImage(id) {
+    updateImage(id);
 }
+
+function onAddLine() {
+    addLine();
+}
+
+function renderNewLineEditor() {
+    var meme = returnGmeme();
+    var lines = meme.txts;
+    document.querySelector('.container').innerHTML += editorSection(lines.length - 1);
+}
+
 
 function renderCanvas() {
     var meme = returnGmeme();
@@ -86,15 +98,15 @@ function renderCanvas() {
     var newImg = new Image()
     newImg.src = '' + imgSrc;
     newImg.onload = function () {
-            ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height);
-            meme.txts.forEach(line => {
-                ctx.fillStyle = line.color;
-                ctx.font = `${line.size}px ${line.font}`;
-                // ctx.globalCompositeOperation = 'source-over';
-                //         // // hard-light
-                ctx.fillText(line.line, line.posX, line.posY);
-            });
-            
+        ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height);
+        meme.txts.forEach(line => {
+            ctx.fillStyle = line.color;
+            ctx.font = `${line.size}px ${line.font}`;
+            // ctx.globalCompositeOperation = 'source-over';
+            //         // // hard-light
+            ctx.fillText(line.line, line.posX, line.posY);
+        });
+
     }
     var elGallery = document.querySelector('.gallery');
     elGallery.style.display = 'none';
@@ -102,7 +114,7 @@ function renderCanvas() {
     elShowBtn.style.display = 'inline';
     var elDownload = document.querySelector('.download');
     elDownload.style.display = 'inline-block';
-    onUpdateSearchKeyCount(meme.selectedImgId)
+    // onUpdateSearchKeyCount(meme.selectedImgId);
 }
 
 // function DynamicText(img) {
@@ -225,6 +237,6 @@ function autocomplete(inp) {
     });
 }
 
-function onUpdateSearchKeyCount(imgId) {
-    UpdateSearchKeyCount(imgId);
-}
+// function onUpdateSearchKeyCount(imgId) {
+//     UpdateSearchKeyCount(imgId);
+// }
