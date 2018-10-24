@@ -66,10 +66,11 @@ function getImgs(filterTag) {
 }
 
 function getImg(id) {
+    console.log(id);
     var findImgWithId = gImgs.find(function (img) {
         if (img.id === id) return img;
     });
-    gMeme.id = findImgWithId.id;
+    gMeme.selectedImgId= findImgWithId.id;
     return findImgWithId;
 }
 

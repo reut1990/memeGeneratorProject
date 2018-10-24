@@ -72,8 +72,9 @@ function drawText(txt, id) {
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     var memes = returnGmeme();
-    drawImage(memes.id);
+    drawImage(memes.selectedImgId);
     var text = gMeme.txts[id];
+    console.log(text);
     text.line = txt;
     ctx.fillStyle = text.color;
     ctx.font = `${text.size}px ${text.font}`;
@@ -83,10 +84,11 @@ function drawText(txt, id) {
 }
 
 function drawImage(id) {
-    var imgSrc = getImg(id).url;
+    console.log(id);
+    var img = getImg(id);
+    var imgSrc=img.url;
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
-    console.log(imgSrc);
     var newImg = new Image()
     newImg.src = '' + imgSrc;
     newImg.onload = function () {
