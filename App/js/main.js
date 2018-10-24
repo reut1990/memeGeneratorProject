@@ -1,8 +1,7 @@
 
 function init() {
     onGetImgs('all');
-    autocomplete(document.getElementById("myInput"));
-    renderEditors();
+    autocomplete(document.querySelector(".myInput"));
 }
 
 function onGetImgs(filterTag) {
@@ -17,39 +16,11 @@ function renderImgs(imgs) {
         var img = imgs[i];
         strHtmls += `
         <li>
-        <img onclick="drawImage(${img.id}), onUpdateSearchKeyCount(${img.keywords})" src=${img.url} alt="">
+        <img onclick="drawImage(${img.id}), onUpdateSearchKeyCount(${img.id})" src=${img.url} alt="">
     </li>
         `;
     }
     elPortfolioContainer.innerHTML = strHtmls;
-}
-
-function renderEditors(){
-    var elcontainer = document.querySelector('.container');
-    var strHtmls = '';
-    for (var i = 0; i < 2; i++) {
-        strHtmls+=`
-        <section class="editor-container"  id=${i}>
-        <input type="text" placeholder="Enter Text" oninput="drawText(this.value, ${i})" />
-        <div class=buttons-edit>
-            <div class="delete" 🗑></div>
-            <div class="text-style">
-                <input type="color" id="html5colorpicker" onchange="onClickColor(this.value)" value="#ff0000" style="width:25%;">
-                <div class="shadow">-Å-</div>
-                <div class="font-size">Å</div>
-            </div>
-            <div class="text-size">
-                <div onclick="onBiggerText()" class="biggerText">➕</div>
-                <div onclick="onSmallerText()" class="smallerText">➖</div>
-            </div>
-            <div class="alignment">alignement</div>
-            <div class="add-line" onClick="addLine">add-line</div>
-        </div>
-    </section>
-         `
-    }
-   elcontainer.innerHTML=strHtmls;
-
 }
 
 function renderTags() {
@@ -67,26 +38,25 @@ function onClickColor(color) {
     changeColor(color);
 }
 
-function drawText(txt, id) {
+function drawText(txt) {
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     var memes = returnGmeme();
     drawImage(memes.id);
-    var text = gMeme.txts[id];
+    var text = gMeme.txts[0];
     text.line = txt;
     ctx.fillStyle = text.color;
     ctx.font = `${text.size}px ${text.font}`;
     ctx.globalCompositeOperation = 'destination-over';
     // ctx.zIndex=3;
-    ctx.fillText(txt, text.posX, text.posY)
+    ctx.fillText(txt, 100, 100)
 }
 
 function drawImage(id) {
-    var imgSrc = getImg(id).url;
+    var imgSrc = getSrc(id);
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
-    console.log(imgSrc);
     var newImg = new Image()
     newImg.src = '' + imgSrc;
     newImg.onload = function () {
@@ -219,6 +189,7 @@ function autocomplete(inp) {
     });
 }
 
-function onUpdateSearchKeyCount(imgKeywords) {
-    UpdateSearchKeyCount(imgKeywords);
+function onUpdateSearchKeyCount(imgId) {
+    UpdateSearchKeyCount(imgId);
+    
 }
