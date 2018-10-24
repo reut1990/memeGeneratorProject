@@ -11,25 +11,27 @@ var gCountKeySearchMap = {
 };
 
 var gMeme = {
-    selectedImgId: 5,
+    selectedImgId: 1,
     txts: [
         {
             id: 0,
-            line: 'I never eat Falafel',
+            line: ' ',
             size: 20,
             align: 'left',
             color: 'red',
-            posy: 100,
-            posY: 100
+            font: 'arial',
+            posX: 50,
+            posY: 50
         },
         {
             id: 1,
-            line: 'I never eat Falafel',
+            line: '',
             size: 20,
             align: 'left',
             color: 'red',
-            posy: 300,
-            posY: 300
+            font: 'arial',
+            posX: 50,
+            posY: 350
         }
     ]
 
@@ -81,6 +83,26 @@ function getImg(id) {
     return findImgWithId;
 }
 
+function getFivePopularKeywords() {
+    var popKeywordsMap = {};
+    gImgs.forEach((img) => {
+        img.keywords.forEach(keyword => {
+            if (!popKeywordsMap[keyword]) popKeywordsMap[keyword] = 1;
+            else popKeywordsMap[keyword]++;
+        })
+    })
+
+    var max = 0;
+    var output = [];
+    for (var key in popKeywordsMap) {
+        if (popKeywordsMap[key] > max) {
+            max = popKeywordsMap[key];
+            output = [key];
+        } else if (popKeywordsMap[key] === max) {
+            output.push(key);
+        }
+    }
+}
 
 function returnGmeme() {
     return gMeme;
@@ -97,18 +119,12 @@ function textStyle(txt) {
     ctx.fillText(txt, 100, 100)
 }
 
-function enlargeText() {
+function changeTextSize(id, sizeChange) {
     var text = gMeme.txts;
-    console.log(text);
-    var textSize = text[0].size + 1;
-    console.log(textSize);
-    // textSize = textSize+1;
-    // console.log(textSize);
-    gMeme.txts[0].size = textSize;
-    console.log(gMeme);
-    drawText(gMeme.txts[0].line);
+    var textSize = text[id].size + sizeChange;
+    gMeme.txts[id].size = textSize;
+    renderCanvas();
 }
-
 
 
 function createKeyArr() {
@@ -126,23 +142,10 @@ function createKeyArr() {
     return allKeywords;
 
 }
-function decreaseText(id) {// unit with the enarge
-    var text = gMeme.txts;
-    console.log(text);
-    var textSize = text[id].size - 1;
-    console.log(textSize);
-    // textSize = textSize+1;
-    // console.log(textSize);
-    gMeme.txts[0].size = textSize;
-    console.log(gMeme);
-    drawText(gMeme.txts[id].line);
-}
 
 function changeColor(color, id) {
-    console.log(color);
-    gMeme.txts[0].color = color;
-    console.log(gMeme);
-    drawText(gMeme.txts[id].line);
+    gMeme.txts[id].color = color;
+   renderCanvas();
 }
 
 
@@ -182,6 +185,47 @@ var countMapCopy = Object.assign({}, gCountKeySearchMap);
             }
         }
     }
+}
+
+function updateText(txt, id){
+    // var canvas = document.getElementById('canvas');
+    // var ctx = canvas.getContext('2d');
+    // ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // var meme = returnGmeme();
+    // var img = getImg(meme.selectedImgId);
+    // var newImg = new Image()
+    // newImg.src = '' + img.url;
+    // console.log(img);
+    // newImg.onload = function () {
+    //     ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height)
+    // }
+    var currLine=gMeme.txts[id]
+    currLine.line = txt;
+    // var imageObj = new Image();
+    // imageObj.onload = function(){
+    // meme.txts.forEach(line => {
+    //     ctx.fillStyle = line.color;
+    //     ctx.font = `${line.size}px ${line.font}`;
+    //     ctx.globalCompositeOperation = 'source-over';
+    //             // // hard-light
+    //     ctx.fillText(line.line, line.posX, line.posY);
+    // });
+    // }
+    // var img=getImg(meme.selectedImgId);
+    // img.onload();
+    // imageObj.src =img.url;
+    renderCanvas();
+}
+
+function updateImage(id){
+    gMeme.selectedImgId=id;
+    renderCanvas();
+}
+
+
+function UpdateSearchKeyCount(imgKeywords) {
+    var img = getImg(imgId);
+    console.log(img);
 }
 
 

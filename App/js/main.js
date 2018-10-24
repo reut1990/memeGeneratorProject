@@ -2,7 +2,7 @@
 function init() {
     onGetImgs('all');
     autocomplete(document.querySelector(".myInput"));
-    renderEditors();
+    renderdefualtEditors();
     renderTags();
 }
 
@@ -18,79 +18,84 @@ function renderImgs(imgs) {
         var img = imgs[i];
         strHtmls += `
         <li>
-        <img onclick="drawImage(${img.id})" src=${img.url} alt="">
+        <img onclick="onDrawImage(${img.id})"  src=${img.url} alt="">
     </li>
         `;
     }
     elImgcontainer.innerHTML = strHtmls;
 }
 
-function renderEditors(){
+function renderdefualtEditors() {
     var elcontainer = document.querySelector('.container');
     var strHtmls = '';
     for (var i = 0; i < 2; i++) {
-        strHtmls+=`
-        <section class="editor-container"  id=${i}>
-        <input type="text" placeholder="Enter Text" oninput="drawText(this.value, ${i})" />
-        <div class=buttons-edit>
-            <div class="delete" 🗑></div>
-            <div class="text-style">
-                <input type="color" id="html5colorpicker" onchange="onClickColor(this.value, ${i})" value="#ff0000" style="width:25%;">
-                <div class="shadow">-Å-</div>
-                <div class="font-size">Å</div>
-            </div>
-            <div class="text-size">
-                <div onclick="onBiggerText(${i})" class="biggerText">➕</div>
-                <div onclick="onSmallerText(${i})" class="smallerText">➖</div>
-            </div>
-            <div class="alignment">alignement</div>
-            <div class="add-line" onClick="addLine">add-line</div>
-        </div>
-    </section>
-         `
+        strHtmls += editorSection(i);
     }
-   elcontainer.innerHTML=strHtmls;
+    elcontainer.innerHTML = strHtmls;
 
 }
 
-
-function onBiggerText() {
-    enlargeText();
-
-}
-function onSmallerText() {
-    decreaseText();
-}
-function onClickColor(color) {
-    console.log(color);
-    changeColor(color);
-}
-
-function drawText(txt, id) {
-    var canvas = document.getElementById('canvas');
-    var ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    var memes = returnGmeme();
-    drawImage(memes.selectedImgId);
-    var text = gMeme.txts[id];
-    console.log(text);
-    text.line = txt;
-    ctx.fillStyle = text.color;
-    ctx.font = `${text.size}px ${text.font}`;
-    ctx.globalCompositeOperation = 'destination-over';
-    // ctx.zIndex=3;
-    ctx.fillText(txt, text.posX, text.posY)
+function editorSection(i){
+    return `<section class="editor-container"  id=${i}>
+    <input type="text" placeholder="Enter Text" oninput="onDrawText(this.value, ${i})" />
+    <div class=buttons-edit>
+        <div class="delete" 🗑></div>
+        <div class="text-style">
+            <input type="color" id="html5colorpicker" onchange="onClickColor(this.value, ${i})" value="#ff0000" style="width:25%;">
+            <div class="shadow">-Å-</div>
+            <div class="font-size">Å</div>
+        </div>
+        <div class="text-size">
+            <div onclick="onBiggerText(${i}, 1)" class="biggerText">➕</div>
+            <div onclick="onSmallerText(${i},-1)" class="smallerText">➖</div>
+        </div>
+        <div class="alignment">alignement</div>
+        <div class="add-line" onClick="addLine">add-line</div>
+    </div>
+</section>
+     `
 }
 
-function drawImage(id) {
-    var img = getImg(id);
-    var imgSrc=img.url;
+function renderTags() {
+    getPopularKeywords();
+}
+function onBiggerText(id, sizeChange) {
+    changeTextSize(id, sizeChange);
+
+}
+function onSmallerText(id, sizeChange) {
+    changeTextSize(id, sizeChange);
+}
+function onClickColor(color, id) {
+    changeColor(color, id);
+}
+
+function onDrawText(txt, id) {
+    updateText(txt, id);
+}
+
+function onDrawImage(id){
+   updateImage(id);
+}
+
+function renderCanvas() {
+    var meme = returnGmeme();
+    var img = getImg(meme.selectedImgId);
+    var imgSrc = img.url;
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
     var newImg = new Image()
     newImg.src = '' + imgSrc;
     newImg.onload = function () {
-        ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height)
+            ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height);
+            meme.txts.forEach(line => {
+                ctx.fillStyle = line.color;
+                ctx.font = `${line.size}px ${line.font}`;
+                // ctx.globalCompositeOperation = 'source-over';
+                //         // // hard-light
+                ctx.fillText(line.line, line.posX, line.posY);
+            });
+            
     }
     var elGallery = document.querySelector('.gallery');
     elGallery.style.display = 'none';
@@ -98,9 +103,19 @@ function drawImage(id) {
     elShowBtn.style.display = 'inline';
     var elDownload = document.querySelector('.download');
     elDownload.style.display = 'inline-block';
-    onUpdateSearchKeyCount(id);
     renderTags();
+    onUpdateSearchKeyCount(meme.selectedImgId)
 }
+
+// function DynamicText(img) {
+//     document.getElementById('name').addEventListener('keyup', function() {
+//       ctx.clearRect(0, 0, canvas.width, canvas.height);
+//       DrawOverlay(img);
+//       DrawText(); 
+//       text_title = this.value;
+//       ctx.fillText(text_title, 50, 50);
+//     });
+//   }
 
 function onShowList() {
     var elGallery = document.querySelector('.gallery');
@@ -109,17 +124,9 @@ function onShowList() {
     elShowBtn.style.display = 'none';
     var elDownload = document.querySelector('.download');
     elDownload.style.display = 'none';
-    function creatLine(txt) {
-        var canvas = document.getElementById('canvas');
-        var ctx = canvas.getContext('2d');
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        var text = gMeme.txts[0];
-        text.line = txt;
-        ctx.fillStyle = text.color;
-        ctx.font = `${text.size}px ${text.font}`
-        ctx.fillText(txt, 100, 100)
-    }
 }
+
+
 
 function autocomplete(inp) {
     var arr = createKeyArr();
