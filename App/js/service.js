@@ -106,6 +106,23 @@ function returnGmeme() {
 //     return{canvas, ctx};
 // }
 
+function findLineClicked(event){// fit to service?
+//.......................
+    if(isFound) moveLine(id);
+}
+
+function moveLine(id){
+   var line=gMeme.txts[id];
+   if(up) line.posY++;
+   else if(down) line.posY++;
+   else if(left) line.posX--;
+   else if(right) line.posX++;
+   renderCanvas();
+}
+
+
+
+
 function deleteLine(index){
     var lines=gMeme.txts;
   lines.splice(index, 1);

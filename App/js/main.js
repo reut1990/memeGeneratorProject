@@ -64,7 +64,7 @@ function renderEditor() {
 }
 
 function onClickCanvas(event){
-   
+   findLineClicked(event);
 }
 
 function onFont(font,id){
