@@ -21,7 +21,8 @@ var gMeme = {
             color: 'red',
             font: 'arial',
             posX: 50,
-            posY: 50
+            posY: 50,
+            shadow: false
         },
         {
             id: 1,
@@ -31,7 +32,8 @@ var gMeme = {
             color: 'red',
             font: 'arial',
             posX: 50,
-            posY: 350
+            posY: 350,
+            shadow: false
         }
     ]
 
@@ -145,7 +147,7 @@ function createKeyArr() {
 
 function changeColor(color, id) {
     gMeme.txts[id].color = color;
-   renderCanvas();
+    renderCanvas();
 }
 
 
@@ -169,7 +171,7 @@ function UpdateSearchKeyCount(imgId) {
 }
 
 function getFivePopularKeywords() {
-var countMapCopy = Object.assign({}, gCountKeySearchMap);
+    var countMapCopy = Object.assign({}, gCountKeySearchMap);
     var fourPopKeywords = [];
     for (let i = 0; i < 5; i++) {
         var max = 0;
@@ -181,13 +183,13 @@ var countMapCopy = Object.assign({}, gCountKeySearchMap);
             if (countMapCopy[keyword] === max) {
                 fourPopKeywords.push(keyword);
                 delete countMapCopy[keyword];
-                if(fourPopKeywords.length === 5) return fourPopKeywords;
+                if (fourPopKeywords.length === 5) return fourPopKeywords;
             }
         }
     }
 }
 
-function updateText(txt, id){
+function updateText(txt, id) {
     // var canvas = document.getElementById('canvas');
     // var ctx = canvas.getContext('2d');
     // ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -199,7 +201,7 @@ function updateText(txt, id){
     // newImg.onload = function () {
     //     ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height)
     // }
-    var currLine=gMeme.txts[id]
+    var currLine = gMeme.txts[id]
     currLine.line = txt;
     // var imageObj = new Image();
     // imageObj.onload = function(){
@@ -217,17 +219,14 @@ function updateText(txt, id){
     renderCanvas();
 }
 
-function updateImage(id){
-    gMeme.selectedImgId=id;
+function updateImage(id) {
+    gMeme.selectedImgId = id;
     renderCanvas();
 }
 
-
-function UpdateSearchKeyCount(imgKeywords) {
-    var img = getImg(imgId);
-    console.log(img);
+function doShadow(id) {
+   gMeme.txts[id].shadow = !gMeme.txts[id].shadow;
+    renderCanvas();    
 }
-
-
 
 

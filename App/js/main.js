@@ -35,14 +35,14 @@ function renderdefualtEditors() {
 
 }
 
-function editorSection(i){
+function editorSection(i) {
     return `<section class="editor-container"  id=${i}>
     <input type="text" placeholder="Enter Text" oninput="onDrawText(this.value, ${i})" />
     <div class=buttons-edit>
         <div class="delete" 🗑></div>
         <div class="text-style">
             <input type="color" id="html5colorpicker" onchange="onClickColor(this.value, ${i})" value="#ff0000" style="width:25%;">
-            <div class="shadow">-Å-</div>
+            <div onclick="onDoShadow(${i})" class="shadow">-Å-</div>
             <div class="font-size">Å</div>
         </div>
         <div class="text-size">
@@ -74,8 +74,12 @@ function onDrawText(txt, id) {
     updateText(txt, id);
 }
 
-function onDrawImage(id){
-   updateImage(id);
+function onDrawImage(id) {
+    updateImage(id);
+}
+
+function onDoShadow(txt, id) {
+    doShadow(txt, id);
 }
 
 function renderCanvas() {
@@ -87,15 +91,16 @@ function renderCanvas() {
     var newImg = new Image()
     newImg.src = '' + imgSrc;
     newImg.onload = function () {
-            ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height);
-            meme.txts.forEach(line => {
-                ctx.fillStyle = line.color;
-                ctx.font = `${line.size}px ${line.font}`;
-                // ctx.globalCompositeOperation = 'source-over';
-                //         // // hard-light
-                ctx.fillText(line.line, line.posX, line.posY);
-            });
-            
+        ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height);
+        meme.txts.forEach(line => {
+            ctx.fillStyle = line.color;
+            ctx.font = `${line.size}px ${line.font}`;
+            // ctx.globalCompositeOperation = 'source-over';
+            //         // // hard-light
+            addShadowToCanvas(line.shadow, ctx);
+            ctx.fillText(line.line, line.posX, line.posY);
+        });
+
     }
     var elGallery = document.querySelector('.gallery');
     elGallery.style.display = 'none';
@@ -104,7 +109,7 @@ function renderCanvas() {
     var elDownload = document.querySelector('.download');
     elDownload.style.display = 'inline-block';
     renderTags();
-    onUpdateSearchKeyCount(meme.selectedImgId)
+    onUpdateSearchKeyCount(meme.selectedImgId);
 }
 
 // function DynamicText(img) {
@@ -237,8 +242,20 @@ function renderTags() {
     var strHtmls = '';
     for (var i = 0; i < fourKeywords.length; i++) {
         strHtmls += `
-        <span class="size-${i+1}" onclick="onGetImgs('${fourKeywords[i]}')">${fourKeywords[i]}</span>`;
+        <span class="size-${i + 1}" onclick="onGetImgs('${fourKeywords[i]}')">${fourKeywords[i]}</span>`;
     }
     eltagsContainer.innerHTML = strHtmls;
 }
-    
+
+function addShadowToCanvas(isShadow, ctx) {
+if (isShadow) {
+    ctx.shadowOffsetX = 5;
+    ctx.shadowOffsetY = 3;
+    ctx.shadowBlur = 2;
+    ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
+} else {
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
+    ctx.shadowBlur = 0;
+}
+}
