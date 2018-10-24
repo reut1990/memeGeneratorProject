@@ -30,7 +30,7 @@ function renderEditors(){
     for (var i = 0; i < 2; i++) {
         strHtmls+=`
         <section class="editor-container"  id=${i}>
-        <input type="text" placeholder="Enter Text" oninput="drawText(this.value)" />
+        <input type="text" placeholder="Enter Text" oninput="drawText(this.value, ${i})" />
         <div class=buttons-edit>
             <div class="delete" 🗑></div>
             <div class="text-style">
@@ -67,19 +67,19 @@ function onClickColor(color) {
     changeColor(color);
 }
 
-function drawText(txt) {
+function drawText(txt, id) {
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     var memes = returnGmeme();
     drawImage(memes.id);
-    var text = gMeme.txts[0];
+    var text = gMeme.txts[id];
     text.line = txt;
     ctx.fillStyle = text.color;
     ctx.font = `${text.size}px ${text.font}`;
     ctx.globalCompositeOperation = 'destination-over';
     // ctx.zIndex=3;
-    ctx.fillText(txt, 100, 100)
+    ctx.fillText(txt, text.posX, text.posY)
 }
 
 function drawImage(id) {

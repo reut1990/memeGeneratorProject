@@ -10,14 +10,18 @@ var gMeme = {
             line: 'I never eat Falafel',
             size: 20,
             align: 'left',
-            color: 'red'
+            color: 'red',
+            posy:100,
+            posY:100
         },
         {
             id:1,
             line: 'I never eat Falafel',
             size: 20,
             align: 'left',
-            color: 'red'
+            color: 'red',
+            posy:300,
+            posY:300
         }
     ]
     
