@@ -1,6 +1,14 @@
 'use strict'
 
-var gCountKeySearchMap = {};
+var gCountKeySearchMap = {
+    happy: 3,
+    evil: 1,
+    cute: 11,
+    sure: 8,
+    mindblown: 2,
+    baby: 5
+
+};
 
 var gMeme = {
     selectedImgId: 1,
@@ -13,7 +21,8 @@ var gMeme = {
             color: 'red',
             font: 'arial',
             posX: 50,
-            posY: 50
+            posY: 50,
+            shadow: false
         },
         {
             id: 1,
@@ -23,7 +32,8 @@ var gMeme = {
             color: 'red',
             font: 'arial',
             posX: 50,
-            posY: 350
+            posY: 350,
+            shadow: false
         }
     ]
 
@@ -68,7 +78,6 @@ function getImgs(filterTag) {
 }
 
 function getImg(id) {
-    console.log(id);
     var findImgWithId = gImgs.find(function (img) {
         if (img.id === id) return img;
     });
@@ -138,7 +147,7 @@ function createKeyArr() {
 
 function changeColor(color, id) {
     gMeme.txts[id].color = color;
-   renderCanvas();
+    renderCanvas();
 }
 
 
@@ -149,8 +158,38 @@ function downloadImg(elLink) {
     elLink.href = imgContent
 }
 
+function UpdateSearchKeyCount(imgId) {
+    var value = document.querySelector('.myInput').value;
+    var imgKeywords = getImg(imgId).keywords;
+    if (value === '') return;
+    var filterdKeywords = imgKeywords.filter(keyword => {
+        return keyword.includes(value);
+    })
+    if (filterdKeywords.length > 1) return;
+    else if (gCountKeySearchMap[filterdKeywords.toString()]) gCountKeySearchMap[filterdKeywords.toString()]++;
+    else gCountKeySearchMap[filterdKeywords.toString()] = 1;
+}
 
-function updateText(txt, id){
+function getFivePopularKeywords() {
+    var countMapCopy = Object.assign({}, gCountKeySearchMap);
+    var fourPopKeywords = [];
+    for (let i = 0; i < 5; i++) {
+        var max = 0;
+        for (let keyword in countMapCopy) {
+            // console.log(gCountKeySearchMap[keyword]);
+            if (countMapCopy[keyword] > max) max = countMapCopy[keyword];
+        }
+        for (let keyword in countMapCopy) {
+            if (countMapCopy[keyword] === max) {
+                fourPopKeywords.push(keyword);
+                delete countMapCopy[keyword];
+                if (fourPopKeywords.length === 5) return fourPopKeywords;
+            }
+        }
+    }
+}
+
+function updateText(txt, id) {
     // var canvas = document.getElementById('canvas');
     // var ctx = canvas.getContext('2d');
     // ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -162,7 +201,7 @@ function updateText(txt, id){
     // newImg.onload = function () {
     //     ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height)
     // }
-    var currLine=gMeme.txts[id]
+    var currLine = gMeme.txts[id]
     currLine.line = txt;
     // var imageObj = new Image();
     // imageObj.onload = function(){
@@ -180,8 +219,8 @@ function updateText(txt, id){
     renderCanvas();
 }
 
-function updateImage(id){
-    gMeme.selectedImgId=id;
+function updateImage(id) {
+    gMeme.selectedImgId = id;
     renderCanvas();
 }
 
@@ -211,4 +250,9 @@ function addLine(){
    gMeme.txts.push(lineObj);
    renderNewLineEditor();
 }
+function doShadow(id) {
+   gMeme.txts[id].shadow = !gMeme.txts[id].shadow;
+    renderCanvas();    
+}
+
 

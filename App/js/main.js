@@ -3,6 +3,7 @@ function init() {
     onGetImgs('all');
     autocomplete(document.querySelector(".myInput"));
     renderdefualtEditors();
+    renderTags();
 }
 
 function onGetImgs(filterTag) {
@@ -11,7 +12,7 @@ function onGetImgs(filterTag) {
 }
 
 function renderImgs(imgs) {
-    var elPortfolioContainer = document.querySelector('.img-container');
+    var elImgcontainer = document.querySelector('.img-container');
     var strHtmls = '';
     for (var i = 0; i < imgs.length; i++) {
         var img = imgs[i];
@@ -21,7 +22,7 @@ function renderImgs(imgs) {
     </li>
         `;
     }
-    elPortfolioContainer.innerHTML = strHtmls;
+    elImgcontainer.innerHTML = strHtmls;
 }
 
 function renderdefualtEditors() {
@@ -42,7 +43,7 @@ function editorSection(i) {
         <div class="delete" 🗑></div>
         <div class="text-style">
             <input type="color" id="html5colorpicker" onchange="onClickColor(this.value, ${i})" value="#ff0000" style="width:25%;">
-            <div class="shadow">-Å-</div>
+            <div onclick="onDoShadow(${i})" class="shadow">-Å-</div>
             <div class="font-size">Å</div>
         </div>
         <div class="text-size">
@@ -78,6 +79,10 @@ function onDrawImage(id) {
     updateImage(id);
 }
 
+function onDoShadow(txt, id) {
+    doShadow(txt, id);
+}
+
 function onAddLine() {
     addLine();
 }
@@ -104,6 +109,7 @@ function renderCanvas() {
             ctx.font = `${line.size}px ${line.font}`;
             // ctx.globalCompositeOperation = 'source-over';
             //         // // hard-light
+            addShadowToCanvas(line.shadow, ctx);
             ctx.fillText(line.line, line.posX, line.posY);
         });
 
@@ -114,7 +120,8 @@ function renderCanvas() {
     elShowBtn.style.display = 'inline';
     var elDownload = document.querySelector('.download');
     elDownload.style.display = 'inline-block';
-    // onUpdateSearchKeyCount(meme.selectedImgId);
+    renderTags();
+    onUpdateSearchKeyCount(meme.selectedImgId);
 }
 
 // function DynamicText(img) {
@@ -237,6 +244,30 @@ function autocomplete(inp) {
     });
 }
 
-// function onUpdateSearchKeyCount(imgId) {
-//     UpdateSearchKeyCount(imgId);
-// }
+function onUpdateSearchKeyCount(imgId) {
+    UpdateSearchKeyCount(imgId);
+}
+
+function renderTags() {
+    var fourKeywords = getFivePopularKeywords();
+    var eltagsContainer = document.querySelector('.tags');
+    var strHtmls = '';
+    for (var i = 0; i < fourKeywords.length; i++) {
+        strHtmls += `
+        <span class="size-${i + 1}" onclick="onGetImgs('${fourKeywords[i]}')">${fourKeywords[i]}</span>`;
+    }
+    eltagsContainer.innerHTML = strHtmls;
+}
+
+function addShadowToCanvas(isShadow, ctx) {
+if (isShadow) {
+    ctx.shadowOffsetX = 5;
+    ctx.shadowOffsetY = 3;
+    ctx.shadowBlur = 2;
+    ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
+} else {
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
+    ctx.shadowBlur = 0;
+}
+}
