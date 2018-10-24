@@ -1,8 +1,13 @@
+//global only to this page--------------good????????
+var gId = 0;
 
 function init() {
+    var canvas = document.querySelector('#canvas');
+    canvas.width = window.innerWidth / 1.5;
+    canvas.height = window.innerHeight / 1.5;
     onGetImgs('all');
     autocomplete(document.querySelector(".myInput"));
-    renderdefualtEditors();
+    renderEditor();
 }
 
 function onGetImgs(filterTag) {
@@ -27,38 +32,44 @@ function renderImgs(imgs) {
     elImgcontainer.innerHTML = strHtmls;
 }
 
-function renderdefualtEditors() {
-    var elcontainer = document.querySelector('.container');
-    var strHtmls = '';
-    for (var i = 0; i < 2; i++) {
-        strHtmls += editorSection(i);
-    }
+function renderEditor() {
+    var elcontainer = document.querySelector('.editor-container');
+    var strHtmls = `
+       <input class="text-input" type="text" placeholder="Enter Text" oninput="onDrawText(this.value, ${gId})" />
+       <div class="buttons-edit">
+        <div class="delete" onclick="onDeleteLine(${gId})">🗑</div>
+        <div class="text-style">
+            <input type="color" id="html5colorpicker" onchange="onClickColor(this.value, ${gId})" value="#ff0000" style="width:25%;">
+            <div onclick="onDoShadow(${gId})" class="shadow">-Å-</div>
+            <div class="dropup font">
+            <button class="dropbtn">font</button>
+            <div class="dropup-content">
+              <div onclick="onFont('cursive',${gId})">cursive</div>
+              <div onclick="onFont('fantasy',${gId})">fantasy</div>
+              <div onclick="onFont('david',${gId})">david</div>
+            </div>
+        </div>
+        </div>
+        <div class="text-size">
+            <div onclick="onBiggerText(${gId}, 1)" class="biggerText">➕</div>
+            <div onclick="onSmallerText(${gId},-1)" class="smallerText">➖</div>
+        </div>
+        <div class="alignment"><div onclick="onAlignText('left', ${gId})">left</div><div onclick="onAlignText('center', ${gId})">center</div><div onclick="onAlignText('right', ${gId})">right</div></div>
+        <div class="add-line" onClick="onAddLine()">add-line</div>
+    </div>
+     `;
+
     elcontainer.innerHTML = strHtmls;
 
 }
 
-function editorSection(i) {
-    return `
-    <section class="editor-container"  id="${i}">
-    <input type="text" placeholder="Enter Text" oninput="onDrawText(this.value, ${i})" />
-    <div class="buttons-edit">
-        <div class="delete" onclick="onDeleteLine(${i})">🗑</div>
-        <div class="text-style">
-            <input type="color" id="html5colorpicker" onchange="onClickColor(this.value, ${i})" value="#ff0000" style="width:25%;">
-            <div onclick="onDoShadow(${i})" class="shadow">-Å-</div>
-            <div class="font-size">Å</div>
-        </div>
-        <div class="text-size">
-            <div onclick="onBiggerText(${i}, 1)" class="biggerText">➕</div>
-            <div onclick="onSmallerText(${i},-1)" class="smallerText">➖</div>
-        </div>
-        <div class="alignment"><div onclick="onAlignText('left', ${i})">left</div><div onclick="onAlignText('center', ${i})">center</div><div onclick="onAlignText('right', ${i})">right</div></div>
-        <div class="add-line" onClick="onAddLine()">add-line</div>
-    </div>
-    </section>
-     `
+function onClickCanvas(event){
+   
 }
 
+function onFont(font,id){
+    changeFont(font,id);
+}
 
 function onBiggerText(id, sizeChange) {
     changeTextSize(id, sizeChange);
@@ -85,22 +96,24 @@ function onDoShadow(txt, id) {
 }
 
 function onAddLine() {
-    addLine();
+    addLine(gId);
+    document.querySelector('.text-input').value = '';
+    gId++;
 }
 
-function onAlignText(direction, id){
+function onAlignText(direction, id) {
     updateAlignment(direction, id);
 }
 
-function onDeleteLine(id){
-   deleteLine(id);
+function onDeleteLine(id) {
+    deleteLine(id);
 }
 
-function renderNewLineEditor() {
-    var meme = returnGmeme();
-    var lines = meme.txts;
-    document.querySelector('.container').innerHTML += editorSection(lines.length - 1);
-}
+// function renderNewLineEditor() {
+//     var meme = returnGmeme();
+//     var lines = meme.txts;
+//     document.querySelector('.container').innerHTML += editorSection(lines.length - 1);
+// }
 
 
 function renderCanvas() {
@@ -113,15 +126,17 @@ function renderCanvas() {
     newImg.src = imgSrc;
     newImg.onload = function () {
         ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height);
+        // ctx.drawImage(img, 0, 0, img.width, img.height,     // source rectangle
+        //     0, 0, canvas.width, canvas.height); // destination rectangle);
         meme.txts.forEach(line => {
             ctx.fillStyle = line.color;
             ctx.font = `${line.size}px ${line.font}`;
             console.log(line.alignment);
-            ctx.textAlign=`${line.alignment}`;
+            ctx.textAlign = `${line.alignment}`;
             // ctx.globalCompositeOperation = 'source-over';
             //         // // hard-light
             addShadowToCanvas(line.shadow, ctx);
-            ctx.fillText(line.line, line.posX, line.posY);
+            ctx.fillText(line.line, canvas.width/2, canvas.height/2);
         });
 
     }
@@ -131,6 +146,10 @@ function renderCanvas() {
     elShowBtn.style.display = 'inline';
     var elDownload = document.querySelector('.download');
     elDownload.style.display = 'inline-block';
+    var elEditor = document.querySelector('.editor-container');
+    elEditor.style.display = 'flex';
+    var elCanvas = document.querySelector('.canvas-container');
+    elCanvas.style.display = 'flex';
     renderTags();
     onUpdateSearchKeyCount(meme.selectedImgId);
 }
@@ -152,6 +171,10 @@ function onShowList() {
     elShowBtn.style.display = 'none';
     var elDownload = document.querySelector('.download');
     elDownload.style.display = 'none';
+    var elEditor = document.querySelector('.editor-container');
+    elEditor.style.display = 'none';
+    var elCanvas = document.querySelector('.canvas');
+    elCanvas.style.display = 'none';
 }
 
 
@@ -284,6 +307,6 @@ function addShadowToCanvas(isShadow, ctx) {
     }
 }
 
-function addAlignmentToCanvas(direction, ctx){
+function addAlignmentToCanvas(direction, ctx) {
 
 }
