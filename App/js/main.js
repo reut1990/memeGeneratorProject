@@ -167,8 +167,14 @@ function renderCanvas() {
         });
 
     }
+    var elMain = document.querySelector('.main-container');
+    elMain.style.display = 'none';
     var elGallery = document.querySelector('.gallery');
     elGallery.style.display = 'none';
+    var elAbout = document.querySelector('.about-container');
+    elAbout.style.display = 'none';
+    var elcontact = document.querySelector('.contact-container');
+    elcontact.style.display = 'none';
     var elShowBtn = document.querySelector('.show-list');
     elShowBtn.style.display = 'inline';
     var elDownload = document.querySelector('.download');
@@ -192,6 +198,12 @@ function renderCanvas() {
 //   }
 
 function onShowList() {
+    var elMain = document.querySelector('.main-container');
+    elMain.style.display = 'block';
+    var elAbout = document.querySelector('.about-container');
+    elAbout.style.display = 'block';
+    var elcontact = document.querySelector('.contact-container');
+    elcontact.style.display = 'block';
     var elGallery = document.querySelector('.gallery');
     elGallery.style.display = 'inline-block';
     var elShowBtn = document.querySelector('.show-list');
@@ -201,7 +213,7 @@ function onShowList() {
     var elEditor = document.querySelector('.editor-container');
     elEditor.style.display = 'none';
     clearCanvas();
-    var elCanvas = document.querySelector('.canvas');
+    var elCanvas = document.querySelector('.canvas-container');
     elCanvas.style.display = 'none';
     
 }
