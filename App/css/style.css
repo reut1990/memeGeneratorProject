@@ -23,8 +23,11 @@
 .img-container {
     display: flex;
     flex-wrap: wrap;
-    width: 70%;
     margin: 0 auto;
+    padding: 0;
+    max-width: 90%;
+    margin: auto;
+    justify-content: center;
 }
 
 ul {
@@ -63,14 +66,11 @@ img {
 }
 
 input {
-    border: 1px solid transparent;
-    background-color: #f1f1f1;
     padding: 10px;
     font-size: 16px;
 }
 
 input[type=text] {
-    background-color: #f1f1f1;
     width: 100%;
 }
 
@@ -110,26 +110,9 @@ input[type=submit] {
     color: #ffffff;
 }
 
-
-
-/* tags text size classes */
-
-.size-5{
-    font-size: 10px;
+.form-autocomplete {
+    margin: 0 auto;
 }
 
-.size-4{
-    font-size: 27px;
-}
 
-.size-3{
-    font-size: 35px;
-}
 
-.size-2{
-    font-size: 45px;
-}
-
-.size-1{
-    font-size: 60px;
-}

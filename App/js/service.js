@@ -6,7 +6,8 @@ var gCountKeySearchMap = {
     cute: 11,
     sure: 8,
     mindblown: 2,
-    baby: 5
+    baby: 5,
+    all: -999999999999999
 };
 
 var gMeme = {

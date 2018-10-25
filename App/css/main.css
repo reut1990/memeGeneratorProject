@@ -1,0 +1,165 @@
+/* BASE */
+
+@font-face {
+    font-family: carter;
+    src: url(../fonts/ARCARTER.ttf);
+}
+
+@font-face {
+    font-family: tempsitc;
+    src: url(../fonts/TEMPSITC.ttf);
+}
+
+.title {
+    font-family: carter;
+    font-size: 5rem;
+    color: white;
+}
+
+html {
+    font-family: tempsitc;
+    color: rgb(78, 78, 78);
+    font-size: 14px;
+    line-height: 24px;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(to bottom, #ffffff 15%,#d6f3f6 32%,#b2e9ee 63%,#97e2e8 81%,#42cad4 100%);}
+
+h2 {
+    margin: 0;
+}
+
+.container {
+    width: 940px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-left: 1px solid rgb(225, 225, 225);
+    border-right: 1px solid rgb(225, 225, 225);
+}
+
+ul {
+    margin: 0;
+}
+
+header {
+    background-color: #42CAD4;
+}
+
+.post-content {
+    height: 100%;
+    margin-left: 36px;
+}
+
+.clean-list {
+    list-style-type: none;
+}
+
+.post-item {
+    height: 310px;
+    margin-bottom: 80px;
+}
+
+.post-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 80px;
+}
+
+.post-heading {
+    margin-bottom: 60px;
+    font-family: tempsitc;
+    font-size: 2rem;
+}
+
+.post-text {
+    font-family: tempsitc;
+    margin: 0 0 30px;
+    font-size: 1.143rem;
+}
+
+.myInput {
+    border-radius: 999px;
+    margin: 0 auto;
+    font-family: tempsitc;
+    border: solid 2px rgb(199, 199, 199);
+}
+
+.main-container {
+    margin: 0 auto;
+}
+
+.meme-img {
+    border-radius: 50%;
+    border: solid 9px #FF9F0E;
+    transition: .2s;
+    cursor: pointer;
+}
+
+.meme-img:hover {
+    border: solid 9px #414141;
+}
+
+
+/* tags */
+
+
+.tags-container {
+    margin: 0 auto;
+    margin-bottom: 54px;
+    padding-top: 54px;
+    cursor: pointer;
+}
+
+.tag {
+    color: #FF9F0E;
+    transition: .2s;
+}
+
+.tag:hover {
+    color: #414141;
+}
+
+
+.all-tag {
+    font-size: 64px;
+    order: -5;
+    color: #42CAD4;
+    transition: .2s;
+}
+
+.all-tag:hover {
+    color: #414141;
+}
+
+.size-5 {
+    font-size: 15px;
+    order: -2;
+    margin-left: 15px;
+    transition: .2s;
+}
+
+.size-4 {
+    font-size: 27px;
+    order: -3;
+    margin-left: 15px;
+}
+
+.size-3 {
+    font-size: 40px;
+    order: 0;
+    margin-left: 15px;
+}
+
+.size-2 {
+    font-size: 65px;
+    order: 3;
+    margin-left: 15px;
+}
+
+.size-1 {
+    font-size: 98px;
+    order: 3;
+    margin-left: 15px;
+}
