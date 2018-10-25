@@ -25,7 +25,7 @@ function renderImgs(imgs) {
         var img = imgs[i];
         strHtmls += `
         <li>
-        <img onclick="onClickImage(${img.id})"  src=${img.url} alt="">
+        <img class="meme-img" onclick="onClickImage(${img.id})"  src=${img.url} alt="">
     </li>
         `;
     }
@@ -304,7 +304,7 @@ function renderTags() {
     var strHtmls = '';
     for (var i = 0; i < fiveKeywords.length; i++) {
         strHtmls += `
-        <span class="size-${i + 1}" onclick="onGetImgs('${fiveKeywords[i]}')">${fiveKeywords[i]}</span>`;
+        <span class="size-${i + 1} tag" onclick="onGetImgs('${fiveKeywords[i]}')">${fiveKeywords[i]}</span>`;
     }
     eltagsContainer.innerHTML = strHtmls;
 }

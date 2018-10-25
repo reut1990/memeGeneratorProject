@@ -5,24 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/flex-helpers.css">
+    <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/style.css">
     <title>MEME GENRATOR</title>
 </head>
 
 <body onload="init()">
-    <button class="show-list" onclick="onShowList()">Show pictures List</button>
+
+        <header>
+                <section class="nav-container flex space-between align-center">
+                    <div class="title" title="" alt="Meme Genarator">Meme Genarator.</div>
+                    <nav class="main-nav flex" id="main-nav">
+                        <a href="#" class="main-nav-item active">Gallery</a>
+                        <a href="#" class="main-nav-item">About</a>
+                        <a href="#" class="main-nav-item">Contact</a>
+                    </nav>
+                    <!-- <button class="menu-icon" onclick="toggleMenu()">☰</button> -->
+                </section>
+            </header>
+
+    <button class="show-list" onclick="onShowList()">Back To Gallery</button>
     <a href="#" class="download" onclick="downloadImg(this)" download="my-img.jpg">
-        Download as jpeg
+        Download
     </a>
-    <form autocomplete="off" action="/action_page.php">
+
+    <section class="main-container flex flex-column">
+    <form class="form-autocomplete" autocomplete="off" action="/action_page.php">
         <div class="autocomplete" style="width:300px;">
-            <input class="myInput" type="text" oninput="onGetImgs(this.value)" name="myCountry" placeholder="Enter Tag...">
-        </div>
-        <input type="submit">
+            <input class="myInput" type="text"  oninput="onGetImgs(this.value)" placeholder="Enter Tag Here...">
+        </div> 
     </form>
-    <div class="tagsContainer">
-        <span onclick="onGetImgs('all')">all</span>
-        <span class="tags"></span>
+    <div class="tags-container flex space-between">
+        <span class="all-tag" onclick="onGetImgs('all')">all</span>
+        <span class="tags flex"></span>
     </div>
 
     <section class="gallery">
