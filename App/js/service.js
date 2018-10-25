@@ -1,5 +1,5 @@
 'use strict'
-
+var gId = 0;
 var gCountKeySearchMap = {
     happy: 3,
     evil: 1,
@@ -19,14 +19,15 @@ var gMeme = {
         {
             id: 0,
             line: ' ',
-            size: 20,
+            size: 30,
             align: 'left',
             color: 'red',
-            font: 'arial',
-            posX: 100,
+            font: 'impact',
+            posX: 300,
             posY: 100,
             shadow: false,
-            alignment: 'center'
+            alignment: 'center',
+            italic:false
         },
     ]
 
@@ -104,69 +105,60 @@ function returnGmeme() {
     return gMeme;
 }
 
-// function getCanvasAndCtx() {
-//     var canvas = document.getElementById('canvas');
-//     var ctx = canvas.getContext('2d');
-//     return{canvas, ctx};
-// }
-
-function findLineClicked(event) {// fit to service?
-    // var canvas = document.getElementById('canvas');// ,ak this two in func-apear a lot
-    // var ctx = canvas.getContext('2d');
-    // console.log(event);
-    // var clickPosX = event.clientX - canvas.offsetLeft;
-    // var clickPosY = event.clientY - canvas.offsetTop;
-    // var line = gMeme.txts.find(line => {
-    //     return (clickPosY < line.posY + 10 && clickPosY > line.posY - line.size - 5
-    //         && clickPosX < line.width + clickPosX + 10 && clickPosX > line.posX - 10);
-    // });
-    // console.log(line);
-    // var text = ctx.measureText(gMeme.txts[0].line); // TextMetrics object
-    // console.log(text.width,); // 16;
-    // var height = parseInt(ctx.font.match(/\d+/), 10);
-    // console.log(height);
-    //     // if(isFound) moveLine(id);
-}
-
-
-function moveLine(id, moveDirection) {
-    var line = gMeme.txts[id];
+function moveLine(moveDirection) {
+    var line = gMeme.txts[gId];
     console.log(moveDirection);
-    if (moveDirection==='up') line.posY-=10;
-    else if (moveDirection==='down') line.posY+=10;
-    else if (moveDirection==='left') line.posX-=10;
-    else if (moveDirection==='right') line.posX+=10;
+    if (moveDirection === 'up') line.posY -= 10;
+    else if (moveDirection === 'down') line.posY += 10;
+    else if (moveDirection === 'left') line.posX -= 10;
+    else if (moveDirection === 'right') line.posX += 10;
+    renderCanvas();
+}
+
+function moveBetweenLines(){
+    gId--;
+    console.log('betweenn lines in service', gId);
+    var lines=gMeme.txts;
+    lines.forEach(function(line){
+       if(line.id===gId) line.italic=true;
+       else line.italic=false;
+    });
+    if((gId<0) || (gId===0)) gId=gMeme.txts.length-1;
+
     renderCanvas();
 }
 
 
 
-
-function deleteLine(index) {
-    var lines = gMeme.txts;
-    lines.splice(index, 1);
-    console.log(lines);
-    renderCanvas();
-}
-
-// function textStyle(txt) {////??????????????????
-//     ctx.fillStyle = 'black'
-//     ctx.font = '50px Arial'
-//     ctx.fillText(txt, 100, 100)
+// function updatePrev(){
+//     gPrev++;
+//     var lines=gMeme.txts;
+//     if(gPrev>lines.length-1) gPrev=0;
 // }
 
-function changeTextSize(id, sizeChange) {
+
+
+function deleteLine() {//check-----------------------------------------------------
     var lines = gMeme.txts;
-    var textSize = lines[id].size + sizeChange;
-    gMeme.txts[id].size = textSize;
+    lines.splice(gId, 1);
     renderCanvas();
 }
 
-function changeFont(font, id) {
+
+
+function changeTextSize(sizeChange) {
+    console.log('when change text size -gId', gId);
+    var lines = gMeme.txts;
+    var textSize = lines[gId].size + sizeChange;
+    gMeme.txts[gId].size = textSize;
+    renderCanvas();
+}
+
+function changeFont(font) {
 
     console.log(font);
     var lines = gMeme.txts;
-    lines[id].font = font;
+    lines[gId].font = font;
     renderCanvas();
 }
 
@@ -186,8 +178,8 @@ function createKeyArr() {
 
 }
 
-function changeColor(color, id) {
-    gMeme.txts[id].color = color;
+function changeColor(color) {
+    gMeme.txts[gId].color = color;
     renderCanvas();
 }
 
@@ -234,83 +226,68 @@ function getFivePopularKeywords() {
         }
     }
 }
-
-function updateText(txt, id) {
-    // var canvas = document.getElementById('canvas');
-    // var ctx = canvas.getContext('2d');
-    // ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // var meme = returnGmeme();
-    // var img = getImg(meme.selectedImgId);
-    // var newImg = new Image()
-    // newImg.src = '' + img.url;
-    // console.log(img);
-    // newImg.onload = function () {
-    //     ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height)
-    // }
-    var currLine = gMeme.txts[id];
-    currLine.line = txt;
-    // var imageObj = new Image();
-    // imageObj.onload = function(){
-    // meme.txts.forEach(line => {
-    //     ctx.fillStyle = line.color;
-    //     ctx.font = `${line.size}px ${line.font}`;
-    //     ctx.globalCompositeOperation = 'source-over';
-    //             // // hard-light
-    //     ctx.fillText(line.line, line.posX, line.posY);
-    // });
-    // }
-    // var img=getImg(meme.selectedImgId);
-    // img.onload();
-    // imageObj.src =img.url;
-    renderCanvas();
+function updateIndex() {
+    gId++;
 }
 
+function updateText(txt,event) {
+    console.log('in update text gId is', gId)
+    var currLine = gMeme.txts[gId];
+    currLine.line = txt;
+    renderCanvas();
+    if (event.keyCode === 13) {
+        console.log('enter presed');
+        document.querySelector('.text-input').value = '';
+    }
+
+}
+
+
+
+
+
 function updateImage(id) {
+    console.log('in update img-id', id);
     gMeme.selectedImgId = id;
     renderCanvas();
 }
 
-function updateAlignment(direction, id) {
-    // console.log(direction, id);
+function updateAlignment(direction) {
     var lines = gMeme.txts;
-    //    console.log(lines[id]);
-    lines[id].alignment = direction;
-    console.log(lines[id].alignment);
+    lines[gId].alignment = direction;
+    console.log(lines[gId].alignment);
     renderCanvas();
 }
-
-// function UpdateSearchKeyCount(imgKeywords) {
-//     var img = getImg(imgId);
-//     console.log(img);
-// }
 
 function creatLineObj() {
 
     return {
         id: gMeme.txts.length,
         line: '',
-        size: 20,
+        size: 30,
         align: 'left',
-        color: 'red',
-        font: 'arial',
-        posX: 200,
+        color: 'black',
+        font: 'impact',
+        posX: 300,
         posY: 200,
         shadow: false,
-        alignment: 'center'
+        alignment: 'center',
+        italic:false
     }
 }
 
-function addLine(id) {
-   //there is one object in global 
-    if (id !== 0) {
+function addLine() {
+    //there is one object in global 
+    if (gId !== 0) {
         var lineObj = creatLineObj();
         gMeme.txts.push(lineObj);
     }
+    gId=gMeme.txts.length-1;
     renderCanvas();
 }
 
-function doShadow(id) {
-    gMeme.txts[id].shadow = !gMeme.txts[id].shadow;
+function doShadow() {
+    gMeme.txts[gId].shadow = !gMeme.txts[gId].shadow;
     renderCanvas();
 }
 

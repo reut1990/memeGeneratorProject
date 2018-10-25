@@ -1,5 +1,5 @@
-//global only to this page--------------good????????
-var gId = 0;
+//global only to this page!
+//I added global on the second page, they both update at the same tim
 
 function init() {
     var canvas = document.querySelector('#canvas');
@@ -32,99 +32,106 @@ function renderImgs(imgs) {
     elImgcontainer.innerHTML = strHtmls;
 }
 
+
 function renderEditor() {
     var elcontainer = document.querySelector('.editor-container');
     var strHtmls = `
-       <input class="text-input" type="text" placeholder="Enter Text" oninput="onDrawText(this.value, ${gId})" />
-       <div class="buttons-edit">
-        <div class="delete" onclick="onDeleteLine(${gId})">🗑</div>
+       <input class="text-input" type="text" placeholder="Enter Text" oninput="onDrawText(this.value,event)" />
+    <div class="buttons-edit">
+        <div class="delete" onclick="onDeleteLine()">🗑</div>
         <div class="text-style">
-            <input type="color" id="html5colorpicker" onchange="onClickColor(this.value, ${gId})" value="#ff0000" style="width:25%;">
-            <div onclick="onDoShadow(${gId})" class="shadow">-Å-</div>
-            <div class="dropup font">
-            <button class="dropbtn">font</button>
-            <div class="dropup-content">
-              <div onclick="onFont('cursive',${gId})">cursive</div>
-              <div onclick="onFont('fantasy',${gId})">fantasy</div>
-              <div onclick="onFont('david',${gId})">david</div>
+            <input type="color" id="html5colorpicker" onchange="onClickColor(this.value)" value="#ff0000" style="width:25%;">
+                <div onclick="onDoShadow()" class="shadow">-Å-</div>
+                <div class="dropup font">
+                    <button class="dropbtn">font</button>
+                    <div class="dropup-content">
+                        <div onclick="onFont('cursive')">cursive</div>
+                        <div onclick="onFont('arial')">arial</div>
+                        <div onclick="onFont('impact')">impact</div>
+                    </div>
+                </div>
+        </div>
+            <div class="text-size">
+                <div onclick="onBiggerText( 1)" class="biggerText">➕</div>
+                <div onclick="onSmallerText(-1)" class="smallerText">➖</div>
             </div>
-        </div>
-        </div>
-        <div class="text-size">
-            <div onclick="onBiggerText(${gId}, 1)" class="biggerText">➕</div>
-            <div onclick="onSmallerText(${gId},-1)" class="smallerText">➖</div>
-        </div>
-        <div class="alignment"><div onclick="onAlignText('left', ${gId})">left</div><div onclick="onAlignText('center', ${gId})">center</div><div onclick="onAlignText('right', ${gId})">right</div></div>
-        <div class="add-line" onClick="onAddLine()">add-line</div>
-        <div class="arrows">
-             <div class="right" onClick="onMoveLine(${gId}, 'right')"> → </div>
-             <div class="left" onClick="onMoveLine(${gId}, 'left')"> ← </div>
-             <div class="down" onClick="onMoveLine(${gId},'down')">↓</div>
-             <div class="Up" onClick="onMoveLine(${gId},'up' )">↑</div>
-        </div>
-    </div>
-     `;
+            <div class="alignment">
+                <div onclick="onAlignText('right')">left</div>
+                <div onclick="onAlignText('center')">center</div>
+                <div onclick="onAlignText('left')">right</div>
+            </div>
+            <div class="add-line" onClick="onAddLine()">add-line</div>
+            <div class="arrows">
+                <div class="right" onClick="onMoveLine( 'right')"> → </div>
+                <div class="left" onClick="onMoveLine( 'left')"> ← </div>
+                <div class="down" onClick="onMoveLine('down')">↓</div>
+                <div class="Up" onClick="onMoveLine('up')">↑</div>
+            </div>
+        </div> 
+        <div class="moveToLines" onClick="onMoveBetweenLines()">Move to Previous lines</div>
+
+        `;
 
     elcontainer.innerHTML = strHtmls;
 
 }
 
-// function onClickCanvas(event){
-//     findLineClicked(event);
-// }
-function onMoveLine(id, moveDirecton) {
+function onMoveBetweenLines() {
+    moveBetweenLines();
+    //    updatePrev();
+    //    var meme = returnGmeme();
+    //    if(gPrevious>meme.txts.length-1) gPrevious=0;
+}
+
+function onMoveLine(moveDirecton) {
     console.log(moveDirecton);
-    moveLine(id, moveDirecton);
+    moveLine(moveDirecton);
 }
 
-
-
-function onFont(font, id) {
-    changeFont(font, id);
+function onFont(font) {
+    changeFont(font);
 }
 
-function onBiggerText(id, sizeChange) {
-    changeTextSize(id, sizeChange);
+function onBiggerText(sizeChange) {
+    changeTextSize(sizeChange);
 
 }
-function onSmallerText(id, sizeChange) {
-    changeTextSize(id, sizeChange);
+function onSmallerText(sizeChange) {
+    changeTextSize(sizeChange);
 }
-function onClickColor(color, id) {
-    changeColor(color, id);
+function onClickColor(color) {
+    changeColor(color);
 }
 
-function onDrawText(txt, id) {
-    updateText(txt, id);
+function onDrawText(txt,event) {
+    updateText(txt,event);
 }
 
 function onClickImage(id) {
+    console.log('in onclick-id',id );
     updateImage(id);
     saveToStorage('CountKeySearchMap', getFivePopularKeywords());
 }
 
-function onDoShadow(txt, id) {
-    doShadow(txt, id);
+function onDoShadow(txt) {
+    doShadow(txt);
 }
 
 function onAddLine() {
-    var lineValue = document.querySelector('.text-input').value;
-    if (lineValue !=="") {
-        addLine(gId);
-        gId++;
-        console.log(gId);
-        document.querySelector('.text-input').value = '';
-    }
-}
-    
-
-
-function onAlignText(direction, id) {
-    updateAlignment(direction, id);
+    // var lineValue = document.querySelector('.text-input').value;
+    updateIndex();
+    addLine();
+    document.querySelector('.text-input').value = '';
 }
 
-function onDeleteLine(id) {
-    deleteLine(id);
+
+
+function onAlignText(direction) {
+    updateAlignment(direction);
+}
+
+function onDeleteLine() {
+    deleteLine();
 }
 
 // function renderNewLineEditor() {
@@ -133,10 +140,15 @@ function onDeleteLine(id) {
 //     document.querySelector('.container').innerHTML += editorSection(lines.length - 1);
 // }
 
+function AddItalic(italic, ctx, line) {
+    if (italic === true) ctx.font = `italic ${line.size}px ${line.font}`;
+    else ctx.font = `${line.size}px ${line.font}`;
+}
 
 function renderCanvas() {
     var meme = returnGmeme();
     var img = getImg(meme.selectedImgId);
+    console.log('img.id in render', img.id);
     var imgSrc = img.url;
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
@@ -148,10 +160,10 @@ function renderCanvas() {
         ctx.drawImage(newImg, 0, 0, newImg.width, newImg.height);
         meme.txts.forEach(line => {
             ctx.fillStyle = line.color;
-            ctx.font = `${line.size}px ${line.font}`;
             ctx.textAlign = `${line.alignment}`;
             addShadowToCanvas(line.shadow, ctx);
-            ctx.strokeText(line.line, line.posX, line.posY);
+            AddItalic(line.italic, ctx, line);
+            ctx.fillText(line.line, line.posX, line.posY);
         });
 
     }
@@ -188,10 +200,17 @@ function onShowList() {
     elDownload.style.display = 'none';
     var elEditor = document.querySelector('.editor-container');
     elEditor.style.display = 'none';
+    clearCanvas();
     var elCanvas = document.querySelector('.canvas');
     elCanvas.style.display = 'none';
+    
 }
 
+function clearCanvas() {
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+}
 
 
 function autocomplete(inp) {
@@ -322,6 +341,6 @@ function addShadowToCanvas(isShadow, ctx) {
     }
 }
 
-function addAlignmentToCanvas(direction, ctx) {
+// function addAlignmentToCanvas(direction, ctx) {
 
-}
+// }
