@@ -25,19 +25,6 @@ var gMeme = {
             shadow: false,
             alignment: 'center'
         },
-        {
-            id: 1,
-            line: '',
-            size: 20,
-            align: 'left',
-            color: 'red',
-            font: 'arial',
-            posX: 500,
-            posY: 350,
-            shadow: false,
-            alignment: 'center'
-
-        }
     ]
 
 }
@@ -120,26 +107,50 @@ function returnGmeme() {
 //     return{canvas, ctx};
 // }
 
+function findLineClicked(event){// fit to service?
+//.......................
+    if(isFound) moveLine(id);
+}
+
+function moveLine(id){
+   var line=gMeme.txts[id];
+   if(up) line.posY++;
+   else if(down) line.posY++;
+   else if(left) line.posX--;
+   else if(right) line.posX++;
+   renderCanvas();
+}
+
+
+
+
 function deleteLine(index){
- console.log(index, 'inDelete');
     var lines=gMeme.txts;
   lines.splice(index, 1);
   console.log(lines);
+  renderCanvas();
 }
 
-function textStyle(txt) {
-    ctx.fillStyle = 'black'
-    ctx.font = '50px Arial'
-    ctx.fillText(txt, 100, 100)
-}
+// function textStyle(txt) {////??????????????????
+//     ctx.fillStyle = 'black'
+//     ctx.font = '50px Arial'
+//     ctx.fillText(txt, 100, 100)
+// }
 
 function changeTextSize(id, sizeChange) {
-    var text = gMeme.txts;
-    var textSize = text[id].size + sizeChange;
+    var lines = gMeme.txts;
+    var textSize = lines[id].size + sizeChange;
     gMeme.txts[id].size = textSize;
     renderCanvas();
 }
 
+function changeFont(font,id){
+    
+    console.log(font);
+    var lines = gMeme.txts;
+    lines[id].font=font;
+    renderCanvas();
+}
 
 function createKeyArr() {
     var allKeywords = [];
@@ -218,7 +229,7 @@ function updateText(txt, id) {
     // newImg.onload = function () {
     //     ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height)
     // }
-    var currLine = gMeme.txts[id]
+  var currLine = gMeme.txts[id];
     currLine.line = txt;
     // var imageObj = new Image();
     // imageObj.onload = function(){
@@ -271,10 +282,13 @@ function creatLineObj() {
     }
 }
 
-function addLine() {
+function addLine(id) {
+    if(id===0){
+        return;
+    }else{
     var lineObj = creatLineObj();
     gMeme.txts.push(lineObj);
-    renderNewLineEditor();
+    }
 }
 function doShadow(id) {
     gMeme.txts[id].shadow = !gMeme.txts[id].shadow;
