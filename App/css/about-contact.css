@@ -4,6 +4,10 @@
     margin-bottom: 30px;
 }
 
+.about-us{
+    margin: 50px;
+}
+
 .reut-container {
     background-color: #8F8F8F;
     width: 50%;
@@ -17,9 +21,9 @@
     height: 650px;
 }
 
-.about-us {
+/* .about-us {
     margin: 40px;
-}
+} */
 
 .about-title {
     font-size: 97px;
@@ -34,29 +38,24 @@
 .reut-title {
     color: #fff;
     font-size: 52px;
-    margin: 71px 126px 0 400px;
+    margin: 50px;
 }
 
 .lior-title {
     color: #fff;
     font-size: 52px;
-    margin: 71px 150px 0 170px;
+    margin: 50px;
 }
 
-.img-lior {
+
+.img-lior,.img-reut {
+    margin-top: 15px;
     border-radius: 50%;
     border: solid 15px #8F8F8F;
-    height: 250px;
-    width: 250px;
-    margin-left: 490px;
-}
-
-.img-reut {
-    border-radius: 50%;
-    border: solid 15px #FF9F0E;
-    height: 250px;
-    width: 250px;
-    margin-left: 50px;
+   
+    height: 50%;
+    width: 50%;
+    margin-left: 20%;
 }
 
 .contact-container {
@@ -88,7 +87,7 @@ form>input {
     border-radius: 99999px;
     border: none;
     margin-bottom: 20px;
-    width: 460px;
+    width: 60%;
     height: 22px;
     font-size: 20px;
     font-family: tempsitc;
@@ -110,8 +109,100 @@ form>input {
     margin-bottom: 70px;
     border-radius: 9px;
     resize: none;
-    width: 471px;
+    width: 90%;
     height: 128px;
     font-size: 20px;
     font-family: tempsitc;
+}
+
+@media (max-width: 740px) {
+
+    .contact-title{
+        font-size: 60px;
+    }
+
+    .about-container {
+        margin-top: 25px;
+    }
+    
+    .lior-title{
+        font-size: 50px;
+        margin:15px 2px 15px 2px;
+    }
+
+    .reut-title{
+        font-size:50px;
+        margin:15px;
+    }
+
+    .info-container{
+        margin-top:20px;
+    }
+    .reut-container, .lior-container {
+      
+        width: 50%;
+        height: 350px; 
+        margin-bottom: 10px;
+    }
+    
+    
+    /* .about-us {
+        margin: 40px;
+    } */
+    
+    .about-title {
+        font-size: 50px;
+    }
+    
+    .us-title {
+        font-size: 50px;
+    }
+    
+    .reut-title {
+        color: #fff;
+        font-size: 25px;
+        margin: 10px;   
+         }
+
+        .you-see{
+            margin-left: 20px;
+            line-height: 1;
+        }
+    
+    .lior-title {
+        color: #fff;
+        font-size: 25px;
+        margin: auto;
+    }
+    
+    .img-lior {
+        margin-top: 15px;
+        border-radius: 50%;
+        border: solid 15px #8F8F8F;
+        width: 80%;
+        
+    }
+    
+    .img-reut {
+        margin-top: 15px;
+        border-radius: 50%;
+        border: solid 15px #FFC107;
+        width: 80%;
+    }
+    .form>input{
+        width: auto;
+    }
+
+    .textarea-message{
+        margin-bottom: 150px;
+    }
+    
+    .tell-us{
+        margin-bottom:42px;
+    }
+
+    .contact-title{
+        padding-top: 50px;
+    }
+    
 }

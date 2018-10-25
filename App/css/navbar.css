@@ -1,7 +1,7 @@
 /* Nav */
 
 .nav-container {
-    width: 940px;
+    width: 95%;
     margin: 0 auto;
     background-color: #42CAD4;
     margin-bottom: 52px;
@@ -109,6 +109,13 @@ footer {
 
 @media (max-width: 740px) {
     .toggle-menu-btn {
-        display: block;
+        display: flex;
+    }
+    .main-nav.flex{
+        display: none;
+    }
+
+    .nav-container{
+        width: 90%;
     }
 }

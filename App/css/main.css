@@ -32,7 +32,7 @@ h2 {
 }
 
 .container {
-    width: 940px;
+    width: 95%;
     margin: 0 auto;
     padding-left: 20px;
     padding-right: 20px;
@@ -172,4 +172,24 @@ header {
     font-size: 98px;
     order: 3;
     margin-left: 15px;
+}
+
+
+
+/* nav-container flex space-between align-center */
+
+@media (max-width: 740px) {
+    .main-container {
+        width: 100%;
+    }
+    .container{
+         width: 95%;
+    }
+    .img-container li{
+        width: 50%;
+    }
+   
+    .form>input{
+        width: auto;
+    }
 }
