@@ -56,6 +56,12 @@ function renderEditor() {
         </div>
         <div class="alignment"><div onclick="onAlignText('left', ${gId})">left</div><div onclick="onAlignText('center', ${gId})">center</div><div onclick="onAlignText('right', ${gId})">right</div></div>
         <div class="add-line" onClick="onAddLine()">add-line</div>
+        <div class="arrows">
+             <div class="right" onClick="onMoveLine(${gId}, 'right')"> → </div>
+             <div class="left" onClick="onMoveLine(${gId}, 'left')"> ← </div>
+             <div class="down" onClick="onMoveLine(${gId},'down')">↓</div>
+             <div class="Up" onClick="onMoveLine(${gId},'up' )">↑</div>
+        </div>
     </div>
      `;
 
@@ -63,12 +69,18 @@ function renderEditor() {
 
 }
 
-function onClickCanvas(event){
-   findLineClicked(event);
+// function onClickCanvas(event){
+//     findLineClicked(event);
+// }
+function onMoveLine(id, moveDirecton) {
+    console.log(moveDirecton);
+    moveLine(id, moveDirecton);
 }
 
-function onFont(font,id){
-    changeFont(font,id);
+
+
+function onFont(font, id) {
+    changeFont(font, id);
 }
 
 function onBiggerText(id, sizeChange) {
@@ -96,10 +108,16 @@ function onDoShadow(txt, id) {
 }
 
 function onAddLine() {
-    addLine(gId);
-    document.querySelector('.text-input').value = '';
-    gId++;
+    var lineValue = document.querySelector('.text-input').value;
+    if (lineValue !=="") {
+        addLine(gId);
+        gId++;
+        console.log(gId);
+        document.querySelector('.text-input').value = '';
+    }
 }
+    
+
 
 function onAlignText(direction, id) {
     updateAlignment(direction, id);
@@ -124,19 +142,16 @@ function renderCanvas() {
     var ctx = canvas.getContext('2d');
     var newImg = new Image()
     newImg.src = imgSrc;
+    canvas.width = newImg.width;
+    canvas.height = newImg.height;
     newImg.onload = function () {
-        ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height);
-        // ctx.drawImage(img, 0, 0, img.width, img.height,     // source rectangle
-        //     0, 0, canvas.width, canvas.height); // destination rectangle);
+        ctx.drawImage(newImg, 0, 0, newImg.width, newImg.height);
         meme.txts.forEach(line => {
             ctx.fillStyle = line.color;
             ctx.font = `${line.size}px ${line.font}`;
-            console.log(line.alignment);
             ctx.textAlign = `${line.alignment}`;
-            // ctx.globalCompositeOperation = 'source-over';
-            //         // // hard-light
             addShadowToCanvas(line.shadow, ctx);
-            ctx.fillText(line.line, canvas.width/2, canvas.height/2);
+            ctx.strokeText(line.line, line.posX, line.posY);
         });
 
     }

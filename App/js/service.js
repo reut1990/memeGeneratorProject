@@ -9,6 +9,9 @@ var gCountKeySearchMap = {
     baby: 5
 };
 
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+// // canvas.width/2, canvas.height/2
 var gMeme = {
     selectedImgId: 1,
     txts: [
@@ -19,8 +22,8 @@ var gMeme = {
             align: 'left',
             color: 'red',
             font: 'arial',
-            posX: 500,
-            posY: 50,
+            posX: 100,
+            posY: 100,
             shadow: false,
             alignment: 'center'
         },
@@ -93,7 +96,7 @@ function getImg(id) {
 //             output.push(key);
 //         }
 //     }
-    
+
 // }
 
 function returnGmeme() {
@@ -106,28 +109,43 @@ function returnGmeme() {
 //     return{canvas, ctx};
 // }
 
-function findLineClicked(event){// fit to service?
-//.......................
-    if(isFound) moveLine(id);
+function findLineClicked(event) {// fit to service?
+    // var canvas = document.getElementById('canvas');// ,ak this two in func-apear a lot
+    // var ctx = canvas.getContext('2d');
+    // console.log(event);
+    // var clickPosX = event.clientX - canvas.offsetLeft;
+    // var clickPosY = event.clientY - canvas.offsetTop;
+    // var line = gMeme.txts.find(line => {
+    //     return (clickPosY < line.posY + 10 && clickPosY > line.posY - line.size - 5
+    //         && clickPosX < line.width + clickPosX + 10 && clickPosX > line.posX - 10);
+    // });
+    // console.log(line);
+    // var text = ctx.measureText(gMeme.txts[0].line); // TextMetrics object
+    // console.log(text.width,); // 16;
+    // var height = parseInt(ctx.font.match(/\d+/), 10);
+    // console.log(height);
+    //     // if(isFound) moveLine(id);
 }
 
-function moveLine(id){
-   var line=gMeme.txts[id];
-   if(up) line.posY++;
-   else if(down) line.posY++;
-   else if(left) line.posX--;
-   else if(right) line.posX++;
-   renderCanvas();
+
+function moveLine(id, moveDirection) {
+    var line = gMeme.txts[id];
+    console.log(moveDirection);
+    if (moveDirection==='up') line.posY-=10;
+    else if (moveDirection==='down') line.posY+=10;
+    else if (moveDirection==='left') line.posX-=10;
+    else if (moveDirection==='right') line.posX+=10;
+    renderCanvas();
 }
 
 
 
 
-function deleteLine(index){
-    var lines=gMeme.txts;
-  lines.splice(index, 1);
-  console.log(lines);
-  renderCanvas();
+function deleteLine(index) {
+    var lines = gMeme.txts;
+    lines.splice(index, 1);
+    console.log(lines);
+    renderCanvas();
 }
 
 // function textStyle(txt) {////??????????????????
@@ -143,11 +161,11 @@ function changeTextSize(id, sizeChange) {
     renderCanvas();
 }
 
-function changeFont(font,id){
-    
+function changeFont(font, id) {
+
     console.log(font);
     var lines = gMeme.txts;
-    lines[id].font=font;
+    lines[id].font = font;
     renderCanvas();
 }
 
@@ -193,7 +211,7 @@ function UpdateSearchKeyCount(imgId) {
 }
 
 function UpdateSearchKeyCountByTag(filterTag) {
-    if(gCountKeySearchMap[filterTag])gCountKeySearchMap[filterTag]++;
+    if (gCountKeySearchMap[filterTag]) gCountKeySearchMap[filterTag]++;
     else gCountKeySearchMap[filterTag] = 1;
 }
 
@@ -228,7 +246,7 @@ function updateText(txt, id) {
     // newImg.onload = function () {
     //     ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height)
     // }
-  var currLine = gMeme.txts[id];
+    var currLine = gMeme.txts[id];
     currLine.line = txt;
     // var imageObj = new Image();
     // imageObj.onload = function(){
@@ -274,7 +292,7 @@ function creatLineObj() {
         align: 'left',
         color: 'red',
         font: 'arial',
-        posX: 500,
+        posX: 200,
         posY: 200,
         shadow: false,
         alignment: 'center'
@@ -282,13 +300,14 @@ function creatLineObj() {
 }
 
 function addLine(id) {
-    if(id===0){
-        return;
-    }else{
-    var lineObj = creatLineObj();
-    gMeme.txts.push(lineObj);
+   //there is one object in global 
+    if (id !== 0) {
+        var lineObj = creatLineObj();
+        gMeme.txts.push(lineObj);
     }
+    renderCanvas();
 }
+
 function doShadow(id) {
     gMeme.txts[id].shadow = !gMeme.txts[id].shadow;
     renderCanvas();
