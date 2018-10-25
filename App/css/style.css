@@ -1,7 +1,4 @@
-.editor-container {
-    border: 2px inset gray;
-    padding: 20px;
-}
+
 
 .editor-container input {
     width: 90%;
@@ -13,10 +10,10 @@
     justify-content: space-around;
 }
 
-.text-style, .text-size, .delete, .alignment, .add-line {
-    border: 2px solid black;
-    padding: 10px;
-}
+/* .text-style, .text-size, .delete, .alignment, .add-line {
+    /* border: 2px solid black; */
+    /* padding: 10px;
+} */ 
 
 .arrows{
     display: flex;
@@ -118,13 +115,7 @@ img {
 justify-content: center;
 }
 
-.dropbtn {
-    background-color: #3498DB;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-}
+
 
 .dropup {
     position: relative;
@@ -153,9 +144,6 @@ justify-content: center;
     display: block;
 }
 
-.dropup:hover .dropbtn {
-    background-color: #2980B9;
-}
 
 .dropup-content div{
     padding: 5px;

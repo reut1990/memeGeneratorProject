@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/pic-editor.css">
     <link rel="stylesheet" href="css/about-contact.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/flex-helpers.css">
@@ -20,7 +21,7 @@
             <div class="title" title="" alt="Meme Genarator">Meme Genarator.</div>
             <nav class="main-nav flex" id="main-nav">
                 <a onclick="scrollToGallery()" class="main-nav-item active">Gallery</a>
-                <a onclick="scrollToAbout()"  class="main-nav-item">About</a>
+                <a onclick="scrollToAbout()" class="main-nav-item">About</a>
                 <a onclick="scrollToContact()" class="main-nav-item">Contact</a>
             </nav>
             <button class="toggle-menu-btn fa" onclick="toggleMenu()" alt="Open main menu">☰</button>
@@ -76,14 +77,15 @@
         <textarea class="textarea-message" type="t" placeholder="Write Your Message Here" name="message"></textarea>
     </form>
 
-    <section class="canvas-container">
-        <canvas onclick="onClickCanvas(event)" id="canvas" width="1000" height="400" style="outline:1px solid green"></canvas>
-        <!-- <canvas id="canvas2" width="1000" height="400" style="outline:1px solid green"></canvas> -->
-    </section>
+    <section class="editor-canvas-container flex">
+        <div class="canvas-container">
+            <canvas onclick="onClickCanvas(event)" id="canvas" width="1000" height="400" style="outline:1px solid green"></canvas>
+            <!-- <canvas id="canvas2" width="1000" height="400" style="outline:1px solid green"></canvas> -->
+        </div>
 
-    <section class="editor-container">
+        <div class="editor-container flex flex-column space-between">
+        </div>
     </section>
-
     <!-- font family, font color, font size, L-R alignment, Up-Down alignment, delete line -->
     <script src="js/util.js"></script>
     <script src="js/service.js"></script>

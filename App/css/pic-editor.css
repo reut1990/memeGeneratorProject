@@ -1,0 +1,140 @@
+.text-input {
+    border-radius: 9999px;
+    border: solid 2px #8F8F8F;
+    padding: 15px;
+}
+
+.editor-canvas-container {}
+
+.editor-container {
+    padding: 20px;
+}
+
+#html5colorpicker {
+    border: solid 5px #414141;
+    border-radius: 999px;
+    height: 20px;
+    width: 20px;
+    padding: 20px;
+    font-size: 50px;
+    background-color: #fff;
+}
+
+.shadow {
+    border: solid 5px #414141;
+    border-radius: 999px;
+    height: 20px;
+    width: 20px;
+    padding: 20px;
+    font-size: 30px;
+}
+
+.delete {
+    border: solid 5px #414141;
+    border-radius: 999px;
+    height: 20px;
+    width: 20px;
+    padding: 20px;
+    font-size: 30px;
+}
+
+.dropbtn {
+    padding: 16px;
+    font-size: 16px;
+    border: solid 5px #414141;
+    border-radius: 999px;
+    height: 70px;
+    width: 70px;
+    background-color: #fff;
+}
+
+.biggerText {
+    border: solid 5px #414141;
+    border-radius: 999px;
+    height: 20px;
+    width: 20px;
+    padding: 20px;
+    font-size: 30px;
+}
+
+.smallerText {
+    border: solid 5px #414141;
+    border-radius: 999px;
+    height: 20px;
+    width: 20px;
+    padding: 20px;
+    font-size: 30px;
+}
+
+.alignLeft {
+    border: solid 5px #414141;
+    border-radius: 999px;
+    height: 20px;
+    width: 20px;
+    padding: 20px;
+    font-size: 25px;
+    text-align: center;
+}
+
+.alignCenter {
+    border: solid 5px #414141;
+    border-radius: 999px;
+    height: 20px;
+    width: 20px;
+    padding: 20px;
+    font-size: 25px;
+}
+
+.alignRight {
+    border: solid 5px #414141;
+    border-radius: 999px;
+    height: 20px;
+    width: 20px;
+    padding: 20px;
+    font-size: 25px;
+}
+
+.add-line {
+    border: solid 5px #414141;
+    border-radius: 999px;
+    height: 20px;
+    width: 20px;
+    padding: 20px;
+    font-size: 25px;
+}
+
+.right {
+    border: solid 5px #414141;
+    border-radius: 999px;
+    height: 20px;
+    width: 20px;
+    padding: 20px;
+    font-size: 25px;
+}
+
+.left{
+    border: solid 5px #414141;
+    border-radius: 999px;
+    height: 20px;
+    width: 20px;
+    padding: 20px;
+    font-size: 25px;
+}
+
+.down{
+    border: solid 5px #414141;
+    border-radius: 999px;
+    height: 20px;
+    width: 20px;
+    padding: 20px;
+    font-size: 25px;
+}
+
+.Up{
+    border: solid 5px #414141;
+    border-radius: 999px;
+    height: 20px;
+    width: 20px;
+    padding: 20px;
+    font-size: 25px;
+}
