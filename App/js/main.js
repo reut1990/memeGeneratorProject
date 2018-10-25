@@ -344,3 +344,27 @@ function addShadowToCanvas(isShadow, ctx) {
 // function addAlignmentToCanvas(direction, ctx) {
 
 // }
+
+
+function scrollToGallery() {
+    document.querySelector('.nav-container').scrollIntoView({
+        behavior: 'smooth'
+    });
+}
+
+function scrollToAbout() {
+    document.querySelector('.about-container').scrollIntoView({
+        behavior: 'smooth'
+    });
+}
+
+function scrollToContact() {
+    document.querySelector('.contact-container').scrollIntoView({
+        behavior: 'smooth'
+    });
+}
+
+function toggleMenu() {
+    var mainMenu = document.getElementById('mainMenu');
+    mainMenu.classList.toggle('open');
+}
