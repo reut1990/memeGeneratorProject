@@ -31,6 +31,7 @@ h2 {
     margin: 0;
 }
 
+
 .container {
     width: 95%;
     margin: 0 auto;
@@ -195,4 +196,8 @@ header {
         width: auto;
     }
 
+
+    .tags-container.flex{
+       display: none;
+    }
 }

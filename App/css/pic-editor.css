@@ -4,7 +4,7 @@
     padding: 15px;
 }
 
-.editor-canvas-container {}
+/* .editor-canvas-container {} */
 
 .editor-container {
     padding: 20px;
@@ -138,3 +138,15 @@
     padding: 20px;
     font-size: 25px;
 }
+
+
+@media (max-width: 740px) {
+    .editor-canvas-containe{
+        /* display: flex; */
+        flex-direction: column;
+    }
+
+
+}
+
+

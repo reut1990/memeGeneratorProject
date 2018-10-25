@@ -103,8 +103,8 @@ function onClickColor(color) {
     changeColor(color);
 }
 
-function onDrawText(txt,event) {
-    updateText(txt,event);
+function onDrawText(txt, event) {
+    updateText(txt, event);
 }
 
 function onClickImage(id) {
@@ -157,19 +157,20 @@ function renderCanvas() {
     let ratio = newImg.width / newImg.height;
     canvas.width = newImg.width;
     canvas.height = newImg.height;
-    if(newImg.width > 500) {
+    if (newImg.width > 500) {
         newImg.width = 500;
         canvas.width = 500;
-        canvas.height = newImg.width/ratio;
-    } 
-    else if (window.innerWidth<500){
-        if(newImg.width > 500) {
-            newImg.width = 300;
-            canvas.width = 300;
-            canvas.height = newImg.width/ratio;
+        canvas.height = newImg.width / ratio;
+    }
+    else if (window.innerWidth < 500) {
+        // if (newImg.width > 500) {
+        //     newImg.width = 300;
+        //     canvas.width = 300;
+        //     canvas.height = newImg.width / ratio;
+        // }
     }
     newImg.onload = function () {
-        ctx.drawImage(newImg, 0, 0, newImg.width,  newImg.width/ratio);
+        ctx.drawImage(newImg, 0, 0, newImg.width, newImg.width / ratio);
         meme.txts.forEach(line => {
             ctx.fillStyle = line.color;
             ctx.textAlign = `${line.alignment}`;
@@ -183,6 +184,7 @@ function renderCanvas() {
     renderTags();
     onUpdateSearchKeyCount(meme.selectedImgId);
 }
+
 
 function hideAllForEditor() {
     var elMain = document.querySelector('.main-container');
@@ -214,6 +216,7 @@ function hideAllForEditor() {
 //   }
 
 function onShowList() {
+    console.log('inside onShowList')
     var elMain = document.querySelector('.main-container');
     elMain.style.display = 'flex';
     var elAbout = document.querySelector('.about-container');
@@ -231,7 +234,6 @@ function onShowList() {
     clearCanvas();
     var elCanvas = document.querySelector('.canvas-container');
     elCanvas.style.display = 'none';
-    
 }
 
 function clearCanvas() {
@@ -368,7 +370,7 @@ function addShadowToCanvas(isShadow, ctx) {
         ctx.shadowBlur = 0;
     }
 }
-}
+
 
 // function addAlignmentToCanvas(direction, ctx) {
 

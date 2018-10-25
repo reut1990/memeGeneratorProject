@@ -139,7 +139,7 @@ function moveBetweenLines(){
 
 
 
-function deleteLine() {//check-----------------------------------------------------
+function deleteLine() {
     var lines = gMeme.txts;
     lines.splice(gId, 1);
     renderCanvas();
