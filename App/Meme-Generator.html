@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/about-contact.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/flex-helpers.css">
     <link rel="stylesheet" href="css/navbar.css">
@@ -14,64 +15,74 @@
 
 <body onload="init()">
 
-        <header>
-                <section class="nav-container flex space-between align-center">
-                    <div class="title" title="" alt="Meme Genarator">Meme Genarator.</div>
-                    <nav class="main-nav flex" id="main-nav">
-                        <a href="#" class="main-nav-item active">Gallery</a>
-                        <a href="#" class="main-nav-item">About</a>
-                        <a href="#" class="main-nav-item">Contact</a>
-                    </nav>
-                    <!-- <button class="menu-icon" onclick="toggleMenu()">☰</button> -->
-                </section>
-            </header>
+    <header>
+        <section class="nav-container flex space-between align-center">
+            <div class="title" title="" alt="Meme Genarator">Meme Genarator.</div>
+            <nav class="main-nav flex" id="main-nav">
+                <a onclick="scrollToGallery()" class="main-nav-item active">Gallery</a>
+                <a onclick="scrollToAbout()"  class="main-nav-item">About</a>
+                <a onclick="scrollToContact()" class="main-nav-item">Contact</a>
+            </nav>
+            <button class="toggle-menu-btn fa" onclick="toggleMenu()" alt="Open main menu">☰</button>
+            <!-- <button class="menu-icon" onclick="toggleMenu()">☰</button> -->
+        </section>
+    </header>
 
     <button class="show-list" onclick="onShowList()">Back To Gallery</button>
     <a href="#" class="download" onclick="downloadImg(this)" download="my-img.jpg">
         Download
     </a>
 
-    <section class="main-container flex flex-column">
-    <form class="form-autocomplete" autocomplete="off" action="/action_page.php">
-        <div class="autocomplete" style="width:300px;">
-            <input class="myInput" type="text"  oninput="onGetImgs(this.value)" placeholder="Enter Tag Here...">
-        </div> 
-    </form>
-    <div class="tags-container flex space-between">
-        <span class="all-tag" onclick="onGetImgs('all')">all</span>
-        <span class="tags flex"></span>
-    </div>
+    <section class="gallery-containter">
+        <div class="main-container flex flex-column">
+            <form class="form-autocomplete" autocomplete="off" action="/action_page.php">
+                <div class="autocomplete" style="width:300px;">
+                    <input class="myInput" type="text" oninput="onGetImgs(this.value)" placeholder="Enter Tag Here...">
+                </div>
+            </form>
+            <div class="tags-container flex space-between">
+                <span class="all-tag" onclick="onGetImgs('all')">all</span>
+                <span class="tags flex"></span>
+            </div>
 
-    <section class="gallery">
-        <ul class="img-container"></ul>
+            <section class="gallery">
+                <ul class="img-container"></ul>
+            </section>
+        </div>
+    </section>
+    <section class="about-container">
+        <div class="about-us flex">
+            <div class="margin-auto about-title">About <span class="us-title">Us</span> </div>
+        </div>
+        <div class="flex">
+            <div class="reut-container">
+                <div class="reut-title">Reut Levin</div>
+                <img class="img-reut" src="img/haim-hecht.jpg" alt="">
+            </div>
+            <div class="lior-container">
+                <div class="lior-title">Lior Youngstein</div>
+                <img class="img-lior" src="img/haim-hecht.jpg" alt="">
+            </div>
+        </div>
     </section>
 
+    <form class="contact-container flex align-center flex-column">
+        <div class="contact-title">Contact Us</div>
+        <div class="you-see">We Would Love To Hear From You</div>
+        <div class="tell-us">❤</div>
+        <input class="input-name" type="text" placeholder="Name" name="name">
+        <input class="input-email" type="email" name="" id="" placeholder="Email" name="email">
+        <input class="input-subject" type="text" placeholder="Subject" name="subject">
+        <textarea class="textarea-message" type="t" placeholder="Write Your Message Here" name="message"></textarea>
+    </form>
+
     <section class="canvas-container">
-        <canvas  onclick="onClickCanvas(event)" id="canvas" width="1000" height="400" style="outline:1px solid green"></canvas>
+        <canvas onclick="onClickCanvas(event)" id="canvas" width="1000" height="400" style="outline:1px solid green"></canvas>
         <!-- <canvas id="canvas2" width="1000" height="400" style="outline:1px solid green"></canvas> -->
     </section>
 
-    <section class="editor-container" >
+    <section class="editor-container">
     </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <!-- font family, font color, font size, L-R alignment, Up-Down alignment, delete line -->
     <script src="js/util.js"></script>

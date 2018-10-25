@@ -1,0 +1,117 @@
+.about-container {
+    width: 100%;
+    background-color: #fff;
+    margin-bottom: 30px;
+}
+
+.reut-container {
+    background-color: #8F8F8F;
+    width: 50%;
+    height: 650px;
+    margin-right: 30px;
+}
+
+.lior-container {
+    background-color: #FF9F0E;
+    width: 50%;
+    height: 650px;
+}
+
+.about-us {
+    margin: 40px;
+}
+
+.about-title {
+    font-size: 97px;
+    color: #FF9F0E;
+}
+
+.us-title {
+    font-size: 97px;
+    color: #8F8F8F;
+}
+
+.reut-title {
+    color: #fff;
+    font-size: 52px;
+    margin: 71px 126px 0 400px;
+}
+
+.lior-title {
+    color: #fff;
+    font-size: 52px;
+    margin: 71px 150px 0 170px;
+}
+
+.img-lior {
+    border-radius: 50%;
+    border: solid 15px #8F8F8F;
+    height: 250px;
+    width: 250px;
+    margin-left: 490px;
+}
+
+.img-reut {
+    border-radius: 50%;
+    border: solid 15px #FF9F0E;
+    height: 250px;
+    width: 250px;
+    margin-left: 50px;
+}
+
+.contact-container {
+    width: 100%;
+    background-color: #414141;
+}
+
+.contact-title {
+    color: white;
+    font-size: 96px;
+    margin-bottom: 50px;
+    padding-top: 110px;
+}
+
+.you-see {
+    color: white;
+    font-size: 37px;
+    margin-bottom: 30px;
+}
+
+.tell-us {
+    color: white;
+    font-size: 49px;
+    margin-bottom: 82px;
+}
+
+form>input {
+    padding: 12px;
+    border-radius: 99999px;
+    border: none;
+    margin-bottom: 20px;
+    width: 460px;
+    height: 22px;
+    font-size: 20px;
+    font-family: tempsitc;
+}
+
+.input-name {
+    margin-bottom: 35px;
+}
+
+.input-email {
+    margin-bottom: 35px;
+}
+
+.input-subject {
+    margin-bottom: 35px;
+}
+
+.textarea-message {
+    margin-bottom: 70px;
+    border-radius: 9px;
+    resize: none;
+    width: 471px;
+    height: 128px;
+    font-size: 20px;
+    font-family: tempsitc;
+}

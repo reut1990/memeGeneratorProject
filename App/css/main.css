@@ -25,7 +25,7 @@ html {
 
 body {
     margin: 0;
-    background: linear-gradient(to bottom, #ffffff 15%,#d6f3f6 32%,#b2e9ee 63%,#97e2e8 81%,#42cad4 100%);}
+}
 
 h2 {
     margin: 0;
@@ -84,10 +84,18 @@ header {
     margin: 0 auto;
     font-family: tempsitc;
     border: solid 2px rgb(199, 199, 199);
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
 }
 
 .main-container {
     margin: 0 auto;
+    width: 80%;
+}
+
+.gallery-containter {
+    background: linear-gradient(to bottom, #ffffff 15%, #d6f3f6 32%, #b2e9ee 63%, #97e2e8 81%, #42cad4 100%);
 }
 
 .meme-img {
@@ -95,15 +103,18 @@ header {
     border: solid 9px #FF9F0E;
     transition: .2s;
     cursor: pointer;
+    margin: 10px;
 }
 
 .meme-img:hover {
     border: solid 9px #414141;
 }
 
+.margin-auto {
+    margin: 0 auto;
+}
 
 /* tags */
-
 
 .tags-container {
     margin: 0 auto;
@@ -120,7 +131,6 @@ header {
 .tag:hover {
     color: #414141;
 }
-
 
 .all-tag {
     font-size: 64px;
