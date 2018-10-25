@@ -154,10 +154,22 @@ function renderCanvas() {
     var ctx = canvas.getContext('2d');
     var newImg = new Image()
     newImg.src = imgSrc;
+    let ratio = newImg.width / newImg.height;
     canvas.width = newImg.width;
     canvas.height = newImg.height;
+    if(newImg.width > 500) {
+        newImg.width = 500;
+        canvas.width = 500;
+        canvas.height = newImg.width/ratio;
+    } 
+    else if (window.innerWidth<500){
+        if(newImg.width > 500) {
+            newImg.width = 300;
+            canvas.width = 300;
+            canvas.height = newImg.width/ratio;
+    }
     newImg.onload = function () {
-        ctx.drawImage(newImg, 0, 0, newImg.width, newImg.height);
+        ctx.drawImage(newImg, 0, 0, newImg.width,  newImg.width/ratio);
         meme.txts.forEach(line => {
             ctx.fillStyle = line.color;
             ctx.textAlign = `${line.alignment}`;
@@ -169,6 +181,11 @@ function renderCanvas() {
     }
     var elGallery = document.querySelector('.gallery');
     elGallery.style.display = 'none';
+    var elAbout = document.querySelector('.about-container');
+    elAbout.style.display = 'none';
+    var elContact = document.querySelector('.about-container');
+    elAbout.style.display = 'none';
+    // contact-container
     var elShowBtn = document.querySelector('.show-list');
     elShowBtn.style.display = 'inline';
     var elDownload = document.querySelector('.download');
@@ -339,6 +356,7 @@ function addShadowToCanvas(isShadow, ctx) {
         ctx.shadowOffsetY = 0;
         ctx.shadowBlur = 0;
     }
+}
 }
 
 // function addAlignmentToCanvas(direction, ctx) {
