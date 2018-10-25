@@ -116,6 +116,7 @@ function moveLine(moveDirection) {
 }
 
 function moveBetweenLines(){
+    if(gId === 0) return;
     gId--;
     console.log('betweenn lines in service', gId);
     var lines=gMeme.txts;
@@ -123,7 +124,7 @@ function moveBetweenLines(){
        if(line.id===gId) line.italic=true;
        else line.italic=false;
     });
-    if((gId<0) || (gId===0)) gId=gMeme.txts.length-1;
+    // if((gId<0) || (gId===0)) gId=gMeme.txts.length-1;
 
     renderCanvas();
 }
