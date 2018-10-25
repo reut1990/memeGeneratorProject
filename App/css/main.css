@@ -175,7 +175,9 @@ header {
 }
 
 
-
+.display-none {
+    display: none;
+}
 /* nav-container flex space-between align-center */
 
 @media (max-width: 740px) {
@@ -192,4 +194,5 @@ header {
     .form>input{
         width: auto;
     }
+
 }

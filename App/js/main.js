@@ -41,7 +41,7 @@ function renderEditor() {
         <div class="delete" onclick="onDeleteLine()">🗑</div>
         <div class="text-style">
             <input type="color" id="html5colorpicker" onchange="onClickColor(this.value)" value="#ff0000" style="width:25%;">
-                <div onclick="onDoShadow()" class="shadow">-Å-</div>
+                <div onclick="onDoShadow()" class="shadow">S</div>
                 <div class="dropup font">
                     <button class="dropbtn">font</button>
                     <div class="dropup-content">
@@ -56,9 +56,9 @@ function renderEditor() {
                 <div onclick="onSmallerText(-1)" class="smallerText">➖</div>
             </div>
             <div class="alignment">
-                <div onclick="onAlignText('right')">left</div>
-                <div onclick="onAlignText('center')">center</div>
-                <div onclick="onAlignText('left')">right</div>
+                <div class="alignLeft" onclick="onAlignText('right')">left</div>
+                <div class="alignCenter" onclick="onAlignText('center')">center</div>
+                <div class="alignRight" onclick="onAlignText('left')">right</div>
             </div>
             <div class="add-line" onClick="onAddLine()">add-line</div>
             <div class="arrows">
@@ -108,9 +108,9 @@ function onDrawText(txt,event) {
 }
 
 function onClickImage(id) {
-    console.log('in onclick-id',id );
     updateImage(id);
     saveToStorage('CountKeySearchMap', getFivePopularKeywords());
+    hideAllForEditor();
 }
 
 function onDoShadow(txt) {
@@ -179,12 +179,18 @@ function renderCanvas() {
         });
 
     }
+
+    renderTags();
+    onUpdateSearchKeyCount(meme.selectedImgId);
+}
+
+function hideAllForEditor() {
     var elMain = document.querySelector('.main-container');
     elMain.style.display = 'none';
     var elGallery = document.querySelector('.gallery');
-    elGallery.style.display = 'none';
+    elGallery.classList.add("display-none");
     var elAbout = document.querySelector('.about-container');
-    elAbout.style.display = 'none';
+    elAbout.classList.add("display-none");
     var elcontact = document.querySelector('.contact-container');
     elcontact.style.display = 'none';
     var elShowBtn = document.querySelector('.show-list');
@@ -195,8 +201,6 @@ function renderCanvas() {
     elEditor.style.display = 'flex';
     var elCanvas = document.querySelector('.canvas-container');
     elCanvas.style.display = 'flex';
-    renderTags();
-    onUpdateSearchKeyCount(meme.selectedImgId);
 }
 
 // function DynamicText(img) {
@@ -211,13 +215,13 @@ function renderCanvas() {
 
 function onShowList() {
     var elMain = document.querySelector('.main-container');
-    elMain.style.display = 'block';
+    elMain.style.display = 'flex';
     var elAbout = document.querySelector('.about-container');
-    elAbout.style.display = 'block';
+    elAbout.classList.remove("display-none");
     var elcontact = document.querySelector('.contact-container');
-    elcontact.style.display = 'block';
+    elcontact.classList.remove("display-none");
     var elGallery = document.querySelector('.gallery');
-    elGallery.style.display = 'inline-block';
+    elGallery.classList.remove("display-none");
     var elShowBtn = document.querySelector('.show-list');
     elShowBtn.style.display = 'none';
     var elDownload = document.querySelector('.download');
@@ -372,18 +376,21 @@ function addShadowToCanvas(isShadow, ctx) {
 
 
 function scrollToGallery() {
+    onShowList();
     document.querySelector('.nav-container').scrollIntoView({
         behavior: 'smooth'
     });
 }
 
 function scrollToAbout() {
+    onShowList();
     document.querySelector('.about-container').scrollIntoView({
         behavior: 'smooth'
     });
 }
 
 function scrollToContact() {
+    onShowList();
     document.querySelector('.contact-container').scrollIntoView({
         behavior: 'smooth'
     });
