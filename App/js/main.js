@@ -368,7 +368,7 @@ function scrollToGallery() {//he wrote repetititve functions. not dry. check how
     document.querySelector('.nav-container').scrollIntoView({
         behavior: 'smooth'
     });
-    document.querySelector('.main-nav').style.transform = 'translate(100%, 0)';
+    // document.querySelector('.main-nav').style.transform = 'translate(100%, 0)';
 }
 
 function scrollToAbout() {
@@ -376,7 +376,7 @@ function scrollToAbout() {
     document.querySelector('.about-container').scrollIntoView({
         behavior: 'smooth'
     });
-    document.querySelector('.main-nav').style.transform = 'translate(100%, 0)';
+    // document.querySelector('.main-nav').style.transform = 'translate(100%, 0)';
 }
 
 function scrollToContact() {
@@ -384,7 +384,7 @@ function scrollToContact() {
     document.querySelector('.contact-container').scrollIntoView({
         behavior: 'smooth'
     });
-    document.querySelector('.main-nav').style.transform = 'translate(100%, 0)';
+    // document.querySelector('.main-nav').style.transform = 'translate(100%, 0)';
 }
 
 
