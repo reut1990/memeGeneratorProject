@@ -52,20 +52,20 @@ function renderEditor() {
                 </div>
         </div>
             <div class="text-size">
-                <div onclick="onBiggerText( 1)" class="biggerText">➕</div>
-                <div onclick="onSmallerText(-1)" class="smallerText">➖</div>
+                <div onclick="onBiggerText( 1)" class="biggerText"><img src="/App/img/icons/plus.jpg"></div>
+                <div onclick="onSmallerText(-1)" class="smallerText"><img src="/App/img/icons/minus.png"></div>
             </div>
             <div class="alignment">
-                <div class="alignLeft" onclick="onAlignText('right')">left</div>
-                <div class="alignCenter" onclick="onAlignText('center')">center</div>
-                <div class="alignRight" onclick="onAlignText('left')">right</div>
+                <div class="alignLeft" onclick="onAlignText('right')"><img src="/App/img/icons/align-left.png"></div>
+                <div class="alignCenter" onclick="onAlignText('center')"><img src="/App/img/icons/align-center.png"></div>
+                <div class="alignRight" onclick="onAlignText('left')"><img src="/App/img/icons/align-right.png"></div>
             </div>
-            <div class="add-line" onClick="onAddLine()">add-line</div>
+            <div class="add-line" onClick="onAddLine()">+line</div>
             <div class="arrows">
-                <div class="right" onClick="onMoveLine( 'right')"> → </div>
-                <div class="left" onClick="onMoveLine( 'left')"> ← </div>
-                <div class="down" onClick="onMoveLine('down')">↓</div>
-                <div class="Up" onClick="onMoveLine('up')">↑</div>
+                <div class="right" onClick="onMoveLine( 'right')"><img src="/App/img/icons/right.png"></div>
+                <div class="left" onClick="onMoveLine( 'left')"><img style="padding=5px" src="/App/img/icons/left.png"></div>
+                <div class="down" onClick="onMoveLine('down')"><img src="/App/img/icons/down.png"></div>
+                <div class="Up" onClick="onMoveLine('up')"><img src="/App/img/icons/up.png"></div>
             </div>
         </div> 
         <div class="moveToLines" onClick="onMoveBetweenLines()">Move to Previous lines</div>

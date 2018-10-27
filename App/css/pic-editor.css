@@ -18,6 +18,7 @@
     padding: 20px;
     font-size: 50px;
     background-color: #fff;
+    cursor: pointer;
 }
 
 .shadow {
@@ -27,6 +28,8 @@
     width: 20px;
     padding: 20px;
     font-size: 30px;
+    cursor: pointer;
+
 }
 
 .delete {
@@ -36,6 +39,8 @@
     width: 20px;
     padding: 20px;
     font-size: 30px;
+    cursor: pointer;
+
 }
 
 .dropbtn {
@@ -46,6 +51,8 @@
     height: 70px;
     width: 70px;
     background-color: #fff;
+    cursor: pointer;
+
 }
 
 .biggerText {
@@ -55,6 +62,8 @@
     width: 20px;
     padding: 20px;
     font-size: 30px;
+    cursor: pointer;
+
 }
 
 .smallerText {
@@ -64,6 +73,8 @@
     width: 20px;
     padding: 20px;
     font-size: 30px;
+    cursor: pointer;
+
 }
 
 .alignLeft {
@@ -74,6 +85,8 @@
     padding: 20px;
     font-size: 25px;
     text-align: center;
+    cursor: pointer;
+
 }
 
 .alignCenter {
@@ -83,6 +96,8 @@
     width: 20px;
     padding: 20px;
     font-size: 25px;
+    cursor: pointer;
+
 }
 
 .alignRight {
@@ -92,6 +107,8 @@
     width: 20px;
     padding: 20px;
     font-size: 25px;
+    cursor: pointer;
+
 }
 
 .add-line {
@@ -100,7 +117,12 @@
     height: 20px;
     width: 20px;
     padding: 20px;
-    font-size: 25px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    font-weight: 700;
+    cursor: pointer;
+
 }
 
 .right {
@@ -110,6 +132,8 @@
     width: 20px;
     padding: 20px;
     font-size: 25px;
+    cursor: pointer;
+
 }
 
 .left{
@@ -119,6 +143,8 @@
     width: 20px;
     padding: 20px;
     font-size: 25px;
+    cursor: pointer;
+
 }
 
 .down{
@@ -128,6 +154,8 @@
     width: 20px;
     padding: 20px;
     font-size: 25px;
+    cursor: pointer;
+
 }
 
 .Up{
@@ -137,6 +165,8 @@
     width: 20px;
     padding: 20px;
     font-size: 25px;
+    cursor: pointer;
+
 }
 
 
