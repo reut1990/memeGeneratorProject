@@ -10,9 +10,7 @@ var gCountKeySearchMap = {
     all: -999999999999999
 };
 
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
-// // canvas.width/2, canvas.height/2
+
 var gMeme = {
     selectedImgId: 1,
     txts: [
@@ -62,6 +60,7 @@ var gImgs = [
 ];
 
 
+
 function getImgs(filterTag) {
     if (filterTag === 'all') return gImgs;
     return gImgs.filter((img) => {
@@ -79,30 +78,27 @@ function getImg(id) {
     return findImgWithId;
 }
 
-// function getFivePopularKeywords() {
-//     var popKeywordsMap = {};
-//     gImgs.forEach((img) => {
-//         img.keywords.forEach(keyword => {
-//             if (!popKeywordsMap[keyword]) popKeywordsMap[keyword] = 1;
-//             else popKeywordsMap[keyword]++;
-//         })
-//     })
 
-//     var max = 0;
-//     var output = [];
-//     for (var key in popKeywordsMap) {
-//         if (popKeywordsMap[key] > max) {
-//             max = popKeywordsMap[key];
-//             output = [key];
-//         } else if (popKeywordsMap[key] === max) {
-//             output.push(key);
-//         }
-//     }
-
-// }
 
 function returnGmeme() {
     return gMeme;
+}
+
+function creatLineObj() {
+
+    return {
+        id: gMeme.txts.length,
+        line: '',
+        size: 30,
+        align: 'left',
+        color: 'black',
+        font: 'impact',
+        posX: 300,
+        posY: 200,
+        shadow: false,
+        alignment: 'center',
+        italic:false
+    }
 }
 
 function moveLine(moveDirection) {
@@ -124,20 +120,9 @@ function moveBetweenLines(){
        if(line.id===gId) line.italic=true;
        else line.italic=false;
     });
-    // if((gId<0) || (gId===0)) gId=gMeme.txts.length-1;
 
     renderCanvas();
 }
-
-
-
-// function updatePrev(){
-//     gPrev++;
-//     var lines=gMeme.txts;
-//     if(gPrev>lines.length-1) gPrev=0;
-// }
-
-
 
 function deleteLine() {
     var lines = gMeme.txts;
@@ -163,6 +148,63 @@ function changeFont(font) {
     renderCanvas();
 }
 
+
+function changeColor(color) {
+    gMeme.txts[gId].color = color;
+    renderCanvas();
+}
+
+function updateIndex() {
+    gId++;
+}
+
+function updateText(txt,event) {
+    console.log('in update text gId is', gId)
+    var currLine = gMeme.txts[gId];
+    currLine.line = txt;
+    renderCanvas();
+    if (event.keyCode === 13) {
+        console.log('enter presed');
+        document.querySelector('.text-input').value = '';
+    }
+
+}
+
+function updateImage(id) {
+    document.querySelector('.canvas-container').focus();
+    gMeme.selectedImgId = id;
+    renderCanvas();
+}
+
+function updateAlignment(direction) {
+    var lines = gMeme.txts;
+    lines[gId].alignment = direction;
+    console.log(lines[gId].alignment);
+    renderCanvas();
+}
+
+function doShadow() {
+    gMeme.txts[gId].shadow = !gMeme.txts[gId].shadow;
+    renderCanvas();
+}
+
+function addLine() {
+    //there is one object in global 
+    if (gId !== 0) {
+        var lineObj = creatLineObj();
+        gMeme.txts.push(lineObj);
+    }
+    gId=gMeme.txts.length-1;
+    renderCanvas();
+}
+
+function downloadImg(elLink) {
+    var canvas = document.getElementById('canvas');// ,ak this two in func-apear a lot
+    var ctx = canvas.getContext('2d');
+    var imgContent = canvas.toDataURL('image/jpeg');
+    elLink.href = imgContent
+}
+
 function createKeyArr() {
     var allKeywords = [];
     var allKeywordsMap = {};
@@ -178,20 +220,6 @@ function createKeyArr() {
     return allKeywords;
 
 }
-
-function changeColor(color) {
-    gMeme.txts[gId].color = color;
-    renderCanvas();
-}
-
-
-function downloadImg(elLink) {
-    var canvas = document.getElementById('canvas');// ,ak this two in func-apear a lot
-    var ctx = canvas.getContext('2d');
-    var imgContent = canvas.toDataURL('image/jpeg');
-    elLink.href = imgContent
-}
-
 function UpdateSearchKeyCount(imgId) {
     var value = document.querySelector('.myInput').value;
     var imgKeywords = getImg(imgId).keywords;
@@ -226,70 +254,6 @@ function getFivePopularKeywords() {
             }
         }
     }
-}
-function updateIndex() {
-    gId++;
-}
-
-function updateText(txt,event) {
-    console.log('in update text gId is', gId)
-    var currLine = gMeme.txts[gId];
-    currLine.line = txt;
-    renderCanvas();
-    if (event.keyCode === 13) {
-        console.log('enter presed');
-        document.querySelector('.text-input').value = '';
-    }
-
-}
-
-
-
-
-
-function updateImage(id) {
-    console.log('in update img-id', id);
-    gMeme.selectedImgId = id;
-    renderCanvas();
-}
-
-function updateAlignment(direction) {
-    var lines = gMeme.txts;
-    lines[gId].alignment = direction;
-    console.log(lines[gId].alignment);
-    renderCanvas();
-}
-
-function creatLineObj() {
-
-    return {
-        id: gMeme.txts.length,
-        line: '',
-        size: 30,
-        align: 'left',
-        color: 'black',
-        font: 'impact',
-        posX: 300,
-        posY: 200,
-        shadow: false,
-        alignment: 'center',
-        italic:false
-    }
-}
-
-function addLine() {
-    //there is one object in global 
-    if (gId !== 0) {
-        var lineObj = creatLineObj();
-        gMeme.txts.push(lineObj);
-    }
-    gId=gMeme.txts.length-1;
-    renderCanvas();
-}
-
-function doShadow() {
-    gMeme.txts[gId].shadow = !gMeme.txts[gId].shadow;
-    renderCanvas();
 }
 
 

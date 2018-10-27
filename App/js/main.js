@@ -1,5 +1,3 @@
-//global only to this page!
-//I added global on the second page, they both update at the same tim
 
 function init() {
     var canvas = document.querySelector('#canvas');
@@ -8,14 +6,6 @@ function init() {
     onGetImgs('all');
     autocomplete(document.querySelector(".myInput"));
     renderEditor();
-}
-
-function onGetImgs(filterTag) {
-    var imgs = getImgs(filterTag);
-    renderImgs(imgs);
-    UpdateSearchKeyCountByTag(filterTag);
-    renderTags();
-    saveToStorage('CountKeySearchMap', getFivePopularKeywords());
 }
 
 function renderImgs(imgs) {
@@ -37,10 +27,15 @@ function renderEditor() {
     var elcontainer = document.querySelector('.editor-container');
     var strHtmls = `
        <input class="text-input" type="text" placeholder="Enter Text" oninput="onDrawText(this.value,event)" />
-    <div class="buttons-edit">
+    <div class="buttons-edit-text-size">
         <div class="delete" onclick="onDeleteLine()">🗑</div>
+        <div class="add-line" onClick="onAddLine()">+line</div>
+        <div onclick="onBiggerText( 1)" class="biggerText"><img src="/App/img/icons/plus.jpg"></div>
+        <div onclick="onSmallerText(-1)" class="smallerText"><img src="/App/img/icons/minus.png"></div>
+    </div>
+        </div>
         <div class="text-style">
-            <input type="color" id="html5colorpicker" onchange="onClickColor(this.value)" value="#ff0000" style="width:25%;">
+                <input type="color" id="html5colorpicker" onchange="onClickColor(this.value)" value="#ff0000" >
                 <div onclick="onDoShadow()" class="shadow">S</div>
                 <div class="dropup font">
                     <button class="dropbtn">font</button>
@@ -51,16 +46,11 @@ function renderEditor() {
                     </div>
                 </div>
         </div>
-            <div class="text-size">
-                <div onclick="onBiggerText( 1)" class="biggerText"><img src="/App/img/icons/plus.jpg"></div>
-                <div onclick="onSmallerText(-1)" class="smallerText"><img src="/App/img/icons/minus.png"></div>
-            </div>
-            <div class="alignment">
+             <div class="alignment">
                 <div class="alignLeft" onclick="onAlignText('right')"><img src="/App/img/icons/align-left.png"></div>
                 <div class="alignCenter" onclick="onAlignText('center')"><img src="/App/img/icons/align-center.png"></div>
                 <div class="alignRight" onclick="onAlignText('left')"><img src="/App/img/icons/align-right.png"></div>
             </div>
-            <div class="add-line" onClick="onAddLine()">+line</div>
             <div class="arrows">
                 <div class="right" onClick="onMoveLine( 'right')"><img src="/App/img/icons/right.png"></div>
                 <div class="left" onClick="onMoveLine( 'left')"><img style="padding=5px" src="/App/img/icons/left.png"></div>
@@ -68,7 +58,7 @@ function renderEditor() {
                 <div class="Up" onClick="onMoveLine('up')"><img src="/App/img/icons/up.png"></div>
             </div>
         </div> 
-        <div class="moveToLines" onClick="onMoveBetweenLines()">Move to Previous lines</div>
+        <div class="move-to-lines" onClick="onMoveBetweenLines()">Move to Previous lines</div>
 
         `;
 
@@ -78,9 +68,6 @@ function renderEditor() {
 
 function onMoveBetweenLines() {
     moveBetweenLines();
-    //    updatePrev();
-    //    var meme = returnGmeme();
-    //    if(gPrevious>meme.txts.length-1) gPrevious=0;
 }
 
 function onMoveLine(moveDirecton) {
@@ -134,12 +121,6 @@ function onDeleteLine() {
     deleteLine();
 }
 
-// function renderNewLineEditor() {
-//     var meme = returnGmeme();
-//     var lines = meme.txts;
-//     document.querySelector('.container').innerHTML += editorSection(lines.length - 1);
-// }
-
 function AddItalic(italic, ctx, line) {
     if (italic === true) ctx.font = `italic ${line.size}px ${line.font}`;
     else ctx.font = `${line.size}px ${line.font}`;
@@ -157,18 +138,18 @@ function renderCanvas() {
     let ratio = newImg.width / newImg.height;
     canvas.width = newImg.width;
     canvas.height = newImg.height;
-    if (newImg.width > 500) {
-        newImg.width = 500;
-        canvas.width = 500;
+    if (newImg.width > 300) {
+        newImg.width = 400;
+        canvas.width = 400;
         canvas.height = newImg.width / ratio;
     }
-    else if (window.innerWidth < 500) {
+    else if (window.innerWidth < 400) {
         // if (newImg.width > 500) {
-        //     newImg.width = 300;
-        //     canvas.width = 300;
-        //     canvas.height = newImg.width / ratio;
-        // }
+        newImg.width = window.innerWidth;
+        canvas.width = window.innerWidth;
+        canvas.height = newImg.width / ratio;
     }
+    // }
     newImg.onload = function () {
         ctx.drawImage(newImg, 0, 0, newImg.width, newImg.width / ratio);
         meme.txts.forEach(line => {
@@ -205,15 +186,6 @@ function hideAllForEditor() {
     elCanvas.style.display = 'flex';
 }
 
-// function DynamicText(img) {
-//     document.getElementById('name').addEventListener('keyup', function() {
-//       ctx.clearRect(0, 0, canvas.width, canvas.height);
-//       DrawOverlay(img);
-//       DrawText(); 
-//       text_title = this.value;
-//       ctx.fillText(text_title, 50, 50);
-//     });
-//   }
 
 function onShowList() {
     console.log('inside onShowList')
@@ -242,6 +214,22 @@ function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 }
 
+function toggleMenu() {
+    document.querySelector('.main-nav').classList.toggle('open');
+    if (document.querySelector('.main-nav').classList.contains('open')) {
+        document.querySelector('.autocomplete').style.position = 'initial';
+    } else {
+        document.querySelector('.autocomplete').style.position = 'relative';
+    }
+}
+
+function onGetImgs(filterTag) {
+    var imgs = getImgs(filterTag);
+    renderImgs(imgs);
+    UpdateSearchKeyCountByTag(filterTag);
+    renderTags();
+    saveToStorage('CountKeySearchMap', getFivePopularKeywords());
+}
 
 function autocomplete(inp) {
     var arr = createKeyArr();
@@ -372,16 +360,15 @@ function addShadowToCanvas(isShadow, ctx) {
 }
 
 
-// function addAlignmentToCanvas(direction, ctx) {
-
-// }
 
 
-function scrollToGallery() {
+
+function scrollToGallery() {//he wrote repetititve functions. not dry. check how with one.
     onShowList();
     document.querySelector('.nav-container').scrollIntoView({
         behavior: 'smooth'
     });
+    document.querySelector('.main-nav').style.transform = 'translate(100%, 0)';
 }
 
 function scrollToAbout() {
@@ -389,6 +376,7 @@ function scrollToAbout() {
     document.querySelector('.about-container').scrollIntoView({
         behavior: 'smooth'
     });
+    document.querySelector('.main-nav').style.transform = 'translate(100%, 0)';
 }
 
 function scrollToContact() {
@@ -396,9 +384,8 @@ function scrollToContact() {
     document.querySelector('.contact-container').scrollIntoView({
         behavior: 'smooth'
     });
+    document.querySelector('.main-nav').style.transform = 'translate(100%, 0)';
 }
 
-function toggleMenu() {
-    var mainMenu = document.getElementById('mainMenu');
-    mainMenu.classList.toggle('open');
-}
+
+

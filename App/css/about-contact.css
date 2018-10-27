@@ -1,3 +1,7 @@
+.info-container{
+    display: flex;
+    flex-direction: row;
+}
 .about-container {
     width: 100%;
     background-color: #fff;
@@ -8,22 +12,18 @@
     margin: 50px;
 }
 
-.reut-container {
+.reut-container,.lior-container{
     background-color: #8F8F8F;
     width: 50%;
-    height: 650px;
-    margin-right: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.lior-container {
-    background-color: #FF9F0E;
-    width: 50%;
-    height: 650px;
-}
+.lior-container{
+    background-color:#FF9F0E;
+ }
 
-/* .about-us {
-    margin: 40px;
-} */
 
 .about-title {
     font-size: 97px;
@@ -35,29 +35,35 @@
     color: #8F8F8F;
 }
 
-.reut-title {
+.reut-title , .lior-title{
     color: #fff;
     font-size: 52px;
     margin: 50px;
+    text-align: center;
 }
 
-.lior-title {
-    color: #fff;
-    font-size: 52px;
-    margin: 50px;
-}
+
 
 
 .img-lior,.img-reut {
-    margin-top: 15px;
     border-radius: 50%;
     border: solid 15px #8F8F8F;
-   
-    height: 50%;
-    width: 50%;
-    margin-left: 20%;
+    height: 200px;
+    width: 200px;
+    margin-bottom: 20px;
 }
 
+.img-reut{
+    border: solid 15px #FF9F0E;  
+}
+
+
+.info{
+    text-align: center;
+    padding: 10px;
+    font-size: 20px;
+    margin-bottom: 40px;
+}
 .contact-container {
     width: 100%;
     background-color: #414141;
@@ -74,6 +80,7 @@
     color: white;
     font-size: 37px;
     margin-bottom: 30px;
+
 }
 
 .tell-us {
@@ -125,30 +132,29 @@ form>input {
         margin-top: 25px;
     }
     
-    .lior-title{
+    .lior-title, .reut-title{
         font-size: 50px;
-        margin:15px 2px 15px 2px;
+        margin-top: 60px;
     }
 
-    .reut-title{
-        font-size:50px;
-        margin:15px;
-    }
+    
 
     .info-container{
         margin-top:20px;
+        display: flex;
+        flex-direction: column;
     }
-    .reut-container, .lior-container {
-      
-        width: 50%;
-        height: 350px; 
-        margin-bottom: 10px;
+   
+    
+    .reut-container,.lior-container  {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     
     
-    /* .about-us {
-        margin: 40px;
-    } */
+  
     
     .about-title {
         font-size: 50px;
@@ -158,37 +164,35 @@ form>input {
         font-size: 50px;
     }
     
-    .reut-title {
+    .reut-title, .lior-title {
         color: #fff;
-        font-size: 25px;
-        margin: 10px;   
+        font-size: 50px;
+        text-align: center;   
          }
 
-        .you-see{
-            margin-left: 20px;
+        .lior-title{
             line-height: 1;
         }
+
+        .you-see{
+            margin: 10px;
+            line-height: 1;
+            text-align: center;
+        }
     
-    .lior-title {
-        color: #fff;
-        font-size: 25px;
-        margin: auto;
-    }
     
-    .img-lior {
+    .img-lior ,.img-reut{
         margin-top: 15px;
         border-radius: 50%;
         border: solid 15px #8F8F8F;
-        width: 80%;
+        margin-bottom: 30px;
         
     }
-    
+     
     .img-reut {
-        margin-top: 15px;
-        border-radius: 50%;
         border: solid 15px #FFC107;
-        width: 80%;
     }
+
     .form>input{
         width: auto;
     }
@@ -206,3 +210,11 @@ form>input {
     }
     
 }
+
+/* @media (max-width: 420px) {
+ .info-container{
+     display: flex;
+     flex-direction: column;
+ }
+
+} */
