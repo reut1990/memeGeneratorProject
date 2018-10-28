@@ -30,8 +30,8 @@ function renderEditor() {
     <div class="buttons-edit-text-size">
         <div class="delete" onclick="onDeleteLine()">🗑</div>
         <div class="add-line" onClick="onAddLine()">+line</div>
-        <div onclick="onBiggerText( 1)" class="biggerText"><img src="./App/img/icons/plus.jpg"></div>
-        <div onclick="onSmallerText(-1)" class="smallerText"><img src="./App/img/icons/minus.png"></div>
+        <div onclick="onBiggerText( 1)" class="biggerText"><img src="./img/icons/plus.jpg"></div>
+        <div onclick="onSmallerText(-1)" class="smallerText"><img src="./img/icons/minus.png"></div>
     </div>
         </div>
         <div class="text-style">
@@ -47,15 +47,15 @@ function renderEditor() {
                 </div>
         </div>
              <div class="alignment">
-                <div class="alignLeft" onclick="onAlignText('right')"><img src="./App/img/icons/align-left.png"></div>
-                <div class="alignCenter" onclick="onAlignText('center')"><img src="./App/img/icons/align-center.png"></div>
-                <div class="alignRight" onclick="onAlignText('left')"><img src="./App/img/icons/align-right.png"></div>
+                <div class="alignLeft" onclick="onAlignText('right')"><img src="./img/icons/align-left.png"></div>
+                <div class="alignCenter" onclick="onAlignText('center')"><img src="./img/icons/align-center.png"></div>
+                <div class="alignRight" onclick="onAlignText('left')"><img src="./img/icons/align-right.png"></div>
             </div>
             <div class="arrows">
-                <div class="right" onClick="onMoveLine( 'right')"><img src="./App/img/icons/right.png"></div>
-                <div class="left" onClick="onMoveLine( 'left')"><img style="padding=5px" src="./App/img/icons/left.png"></div>
-                <div class="down" onClick="onMoveLine('down')"><img src="./App/img/icons/down.png"></div>
-                <div class="Up" onClick="onMoveLine('up')"><img src="./App/img/icons/up.png"></div>
+                <div class="right" onClick="onMoveLine( 'right')"><img src="./img/icons/right.png"></div>
+                <div class="left" onClick="onMoveLine( 'left')"><img style="padding=5px" src="./img/icons/left.png"></div>
+                <div class="down" onClick="onMoveLine('down')"><img src="./img/icons/down.png"></div>
+                <div class="Up" onClick="onMoveLine('up')"><img src="./img/icons/up.png"></div>
             </div>
         </div> 
         <div class="move-to-lines" onClick="onMoveBetweenLines()">Move to Previous lines</div>
