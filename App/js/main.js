@@ -46,7 +46,7 @@ function renderEditor() {
                     </div>
                 </div>
         </div>
-             <div class="alignment">
+        <div class="alignment">
                 <div class="alignLeft" onclick="onAlignText('right')"><img src="./img/icons/align-left.png"></div>
                 <div class="alignCenter" onclick="onAlignText('center')"><img src="./img/icons/align-center.png"></div>
                 <div class="alignRight" onclick="onAlignText('left')"><img src="./img/icons/align-right.png"></div>
